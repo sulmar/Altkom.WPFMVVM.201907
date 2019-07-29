@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Altkom.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800.5">
     <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="50*" />
+        </Grid.ColumnDefinitions>
+
+        <Button Background="Blue" Grid.Column="0" Width="70"></Button>
+
+        <Button Grid.Column="1">
+            <Grid>
+                <Label>Hello </Label>
+                <Label>World</Label>
+            </Grid>
+            
+        </Button>
+
         
+
+
     </Grid>
 </Window>

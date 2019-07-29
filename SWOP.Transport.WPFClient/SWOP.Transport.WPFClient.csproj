@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FDB339F6-C9BE-49B8-9904-551306A4E6B3}</ProjectGuid>
+    <ProjectGuid>{EC527656-C7DC-41C4-B473-4A12118E6F6B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Altkom.WPF</RootNamespace>
-    <AssemblyName>Altkom.WPF</AssemblyName>
+    <RootNamespace>SWOP.Transport.WPFClient</RootNamespace>
+    <AssemblyName>SWOP.Transport.WPFClient</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bogus, Version=28.0.2.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bogus.28.0.2\lib\net40\Bogus.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,52 +58,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="LayoutControls\CanvasView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LayoutControls\DockPanelView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LayoutControls\GridView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LayoutControls\StackPanelView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LayoutControls\UniformGridView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LayoutControls\CanvasView.xaml.cs">
-      <DependentUpon>CanvasView.xaml</DependentUpon>
+    <Compile Include="ViewModelLocator.cs" />
+    <Compile Include="Views\ShellView.xaml.cs">
+      <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LayoutControls\DockPanelView.xaml.cs">
-      <DependentUpon>DockPanelView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LayoutControls\GridView.xaml.cs">
-      <DependentUpon>GridView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LayoutControls\StackPanelView.xaml.cs">
-      <DependentUpon>StackPanelView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LayoutControls\UniformGridView.xaml.cs">
-      <DependentUpon>UniformGridView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="Views\VehiclesView.xaml.cs">
+      <DependentUpon>VehiclesView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +88,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -128,6 +96,34 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VehiclesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SWOP.Transport.FakeRepositories\SWOP.Transport.FakeRepositories.csproj">
+      <Project>{4E4A1504-E068-4398-AAAA-C3C1D1D4DA3D}</Project>
+      <Name>SWOP.Transport.FakeRepositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SWOP.Transport.IRepositories\SWOP.Transport.IRepositories.csproj">
+      <Project>{9F2E012F-55E4-45C9-9BE1-44F029EB3DD6}</Project>
+      <Name>SWOP.Transport.IRepositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SWOP.Transport.Models\SWOP.Transport.Models.csproj">
+      <Project>{0c4a3b26-0839-43c1-a942-645a3fc8c996}</Project>
+      <Name>SWOP.Transport.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SWOP.Transport.ViewModels\SWOP.Transport.ViewModels.csproj">
+      <Project>{6da15675-b169-453f-a56e-adb604b82700}</Project>
+      <Name>SWOP.Transport.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

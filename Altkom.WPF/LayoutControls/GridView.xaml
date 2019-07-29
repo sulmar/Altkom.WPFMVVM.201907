@@ -1,0 +1,45 @@
+﻿<Window x:Class="Altkom.WPF.LayoutControls.GridView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Altkom.WPF.LayoutControls"
+        mc:Ignorable="d"
+        Title="GridView" Height="450" Width="800">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Border Background="Red" 
+                Grid.Column="0" 
+                Grid.ColumnSpan="2" />
+
+        <Border Background="Blue"
+                    Grid.Column="1"
+                    Grid.Row="1" />
+
+        <StackPanel Grid.Column="1" Grid.Row="2">
+            <Button Width="200" Background="Red">Button 1</Button>
+            <Button Width="200" Background="Blue">Button 2</Button>
+            <Button Width="200" Background="Yellow">
+                <StackPanel Orientation="Horizontal">
+                    <Label>Button 3a</Label>
+                    <CheckBox>Button 3b</CheckBox>
+                    <Button>Button 3c</Button>
+                </StackPanel>
+                
+
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</Window>

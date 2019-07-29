@@ -1,0 +1,65 @@
+﻿<Page x:Class="SWOP.Transport.WPFClient.Views.VehiclesView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SWOP.Transport.WPFClient.Views"
+      xmlns:vm="clr-namespace:SWOP.Transport.ViewModels;assembly=SWOP.Transport.ViewModels"
+      xmlns:m="clr-namespace:SWOP.Transport.Models;assembly=SWOP.Transport.Models"
+      DataContext="{Binding Source={StaticResource ViewModelLocator }, Path=VehiclesViewModel}"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="VehiclesView">
+
+    <Page.Resources>
+        <SolidColorBrush x:Key="MyBackgroundBrush" Color="SteelBlue" />
+
+        <Style x:Key="MyLabelStyle" TargetType="Label" >
+            <Setter Property="Background" Value="{StaticResource MyBackgroundBrush}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Width" Value="300" />
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsRemoved}" Value="True">
+                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="Foreground" Value="Black" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="HighlightLabelStyle" TargetType="Label" BasedOn="{StaticResource MyLabelStyle}">
+            <Setter Property="Foreground" Value="Red" />
+        </Style>
+
+        <Style TargetType="Label" BasedOn="{StaticResource MyLabelStyle}" />
+    </Page.Resources>
+
+    <!--<Page.DataContext>
+        <vm:VehiclesViewModel />
+    </Page.DataContext>-->
+
+    <Grid Background="SteelBlue">
+
+        <ListBox ItemsSource="{Binding Path=Vehicles}"
+             SelectedItem="{Binding SelectedVehicle}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type m:Vehicle}">
+                    <StackPanel Orientation="Horizontal">
+                        <!--<Label Width="200" Background="{StaticResource MyBackgroundBrush}" Content="{Binding Brand}" />-->
+                        <Label Content="{Binding Brand}" />
+                        <Label Content="{Binding Model}" />
+                        <Label Style="{StaticResource HighlightLabelStyle}"
+                               Content="{Binding PlateNumber}" />
+                        <Label Content="Hello" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+           
+        </ListBox>
+
+        <!--<DataGrid ItemsSource="{Binding Vehicles}"
+                  SelectedItem="{Binding SelectedVehicle}"
+                  AutoGenerateColumns="True" />-->
+
+    </Grid>
+</Page>

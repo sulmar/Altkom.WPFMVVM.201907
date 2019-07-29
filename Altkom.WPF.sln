@@ -5,6 +5,16 @@ VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altkom.WPF", "Altkom.WPF\Altkom.WPF.csproj", "{FDB339F6-C9BE-49B8-9904-551306A4E6B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWOP.Transport.WPFClient", "SWOP.Transport.WPFClient\SWOP.Transport.WPFClient.csproj", "{EC527656-C7DC-41C4-B473-4A12118E6F6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWOP.Transport.Models", "SWOP.Transport.Models\SWOP.Transport.Models.csproj", "{0C4A3B26-0839-43C1-A942-645A3FC8C996}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWOP.Transport.ViewModels", "SWOP.Transport.ViewModels\SWOP.Transport.ViewModels.csproj", "{6DA15675-B169-453F-A56E-ADB604B82700}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWOP.Transport.IRepositories", "SWOP.Transport.IRepositories\SWOP.Transport.IRepositories.csproj", "{9F2E012F-55E4-45C9-9BE1-44F029EB3DD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWOP.Transport.FakeRepositories", "SWOP.Transport.FakeRepositories\SWOP.Transport.FakeRepositories.csproj", "{4E4A1504-E068-4398-AAAA-C3C1D1D4DA3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +25,26 @@ Global
 		{FDB339F6-C9BE-49B8-9904-551306A4E6B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDB339F6-C9BE-49B8-9904-551306A4E6B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDB339F6-C9BE-49B8-9904-551306A4E6B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC527656-C7DC-41C4-B473-4A12118E6F6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC527656-C7DC-41C4-B473-4A12118E6F6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC527656-C7DC-41C4-B473-4A12118E6F6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC527656-C7DC-41C4-B473-4A12118E6F6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C4A3B26-0839-43C1-A942-645A3FC8C996}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C4A3B26-0839-43C1-A942-645A3FC8C996}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C4A3B26-0839-43C1-A942-645A3FC8C996}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C4A3B26-0839-43C1-A942-645A3FC8C996}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DA15675-B169-453F-A56E-ADB604B82700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DA15675-B169-453F-A56E-ADB604B82700}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DA15675-B169-453F-A56E-ADB604B82700}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DA15675-B169-453F-A56E-ADB604B82700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F2E012F-55E4-45C9-9BE1-44F029EB3DD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F2E012F-55E4-45C9-9BE1-44F029EB3DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F2E012F-55E4-45C9-9BE1-44F029EB3DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F2E012F-55E4-45C9-9BE1-44F029EB3DD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E4A1504-E068-4398-AAAA-C3C1D1D4DA3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E4A1504-E068-4398-AAAA-C3C1D1D4DA3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E4A1504-E068-4398-AAAA-C3C1D1D4DA3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E4A1504-E068-4398-AAAA-C3C1D1D4DA3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
