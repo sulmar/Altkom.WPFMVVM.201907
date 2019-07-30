@@ -23,7 +23,7 @@
                 <StatusBarItem HorizontalAlignment="Right">Opcja 3</StatusBarItem>
             </StatusBar>
 
-            <Frame Source="VehiclesView.xaml" />
+            <Frame Source="EmployeesView.xaml" />
         </DockPanel>
 
     </Grid>

@@ -50,7 +50,7 @@
                         <Label Content="{Binding Model}" />
                         <Label Style="{StaticResource HighlightLabelStyle}"
                                Content="{Binding PlateNumber}" />
-                        <Label Content="Hello" />
+                        <Label Content="{Binding Type}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

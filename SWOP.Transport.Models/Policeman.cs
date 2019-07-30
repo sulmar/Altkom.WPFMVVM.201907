@@ -2,6 +2,26 @@
 {
     public class Policeman : Employee
     {
-        public string Grade { get; set; }
+        public Grade Grade { get; set; }
+
+        public override decimal Calculate()
+        {            
+            return base.Calculate() + 100;
+        }
+
+        //public new decimal Calculate()
+        //{
+        //    return 100;
+        //}
+    }
+
+    public enum Grade
+    {
+        Posterunkowy,
+        Sierzant,
+        StarszySierzant,
+        Aspirant,
+        Komisarz,
+        Inspektor
     }
 }

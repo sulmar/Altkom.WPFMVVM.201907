@@ -2,6 +2,6 @@
 {
     public class Civil : Employee
     {
-
+       
     }
 }

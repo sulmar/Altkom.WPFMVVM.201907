@@ -8,5 +8,11 @@ namespace SWOP.Transport.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+
+        public virtual decimal Calculate()
+        {
+            return 10;
+        }
     }
 }
