@@ -1,47 +1,26 @@
-﻿using SWOP.Transport.FakeRepositories.Fakers;
+﻿using Bogus;
+using SWOP.Transport.FakeRepositories.Fakers;
 using SWOP.Transport.IRepositories;
 using SWOP.Transport.Models;
+using SWOP.Transport.Models.SearchCriterias;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SWOP.Transport.FakeRepositories
 {
-    public class FakeVehicleRepository : IVehicleRepository
+
+    public class FakeVehicleRepository : FakeEntityRepository<Vehicle>, IVehicleRepository
     {
-        private ICollection<Vehicle> vehicles;
-
-        private VehicleFaker vehicleFaker;
-
-        public FakeVehicleRepository()
+        public FakeVehicleRepository(VehicleFaker faker) : base(faker)
         {
-            vehicleFaker = new VehicleFaker();
-
-            vehicles = vehicleFaker.Generate(100);
         }
 
-        public void Add(Vehicle vehicle)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICollection<Vehicle> Get()
-        {
-            return vehicles; 
-        }
-
-        public Vehicle Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Vehicle vehicle)
+        public ICollection<Vehicle> Get(VehicleSearchCriteria criteria)
         {
             throw new NotImplementedException();
         }
     }
+
+    
 }

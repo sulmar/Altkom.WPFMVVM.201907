@@ -5,12 +5,18 @@ using System.Text;
 
 namespace SWOP.Transport.IRepositories
 {
-    public interface IEmployeeRepository
+    //public interface IEmployeeRepository
+    //{
+    //    ICollection<Employee> Get();
+    //    Employee Get(int id);
+    //    void Add(Employee employee);
+    //    void Update(Employee employee);
+    //    void Remove(int id);
+    //}
+
+    public interface IEmployeeRepository : IEntityRepository<Employee>
     {
-        ICollection<Employee> Get();
-        Employee Get(int id);
-        void Add(Employee employee);
-        void Update(Employee employee);
-        void Remove(int id);
+
     }
+
 }
