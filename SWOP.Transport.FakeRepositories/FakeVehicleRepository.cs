@@ -37,7 +37,11 @@ namespace SWOP.Transport.FakeRepositories
 
             if (!string.IsNullOrEmpty(criteria.PlateNumber))
             {
-                results = results.Where(p => p.PlateNumber.Contains(criteria.PlateNumber));
+                //bool isHoliday1 = DateTime.Now.IsHoliday();
+
+                //bool isHoliday = DateTimeHelper.IsHoliday(DateTime.Now);
+
+                results = results.Where(p => p.PlateNumber.ContainsInvariant(criteria.PlateNumber));
             }
 
             if (criteria.Period.From.HasValue)

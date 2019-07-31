@@ -74,7 +74,9 @@
 
                 </Grid>
 
-                <Button Height="50" Content="Search" Command="{Binding SearchCommand}" />
+                <Button Height="50" Content="Search" Command="{Binding SearchCommand}"
+                        Style="{StaticResource SearchButtonStyle}"
+                        />
 
             </StackPanel>
 

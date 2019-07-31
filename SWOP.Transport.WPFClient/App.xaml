@@ -5,8 +5,13 @@
              
              StartupUri="Views/ShellView.xaml">
     <Application.Resources>
+        
         <ResourceDictionary>
             <local:ViewModelLocator x:Key="ViewModelLocator" />
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

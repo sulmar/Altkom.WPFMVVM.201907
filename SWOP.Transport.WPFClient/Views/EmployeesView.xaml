@@ -13,7 +13,7 @@
 
         <DockPanel>
             
-            <StackPanel Width="150" DockPanel.Dock="Right">
+            <StackPanel DockPanel.Dock="Right">
                 <Button Content="Send" Command="{Binding SendCommand}" />
                 <Button Content="Print A" Command="{Binding PrintCommand}" CommandParameter="A" />
                 <Button Content="Print B" Command="{Binding PrintCommand}" CommandParameter="B" />
