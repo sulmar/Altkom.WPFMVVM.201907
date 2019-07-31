@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="8.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SWOP.Transport.FakeRepositories\SWOP.Transport.FakeRepositories.csproj" />
     <ProjectReference Include="..\SWOP.Transport.IRepositories\SWOP.Transport.IRepositories.csproj" />
     <ProjectReference Include="..\SWOP.Transport.Models\SWOP.Transport.Models.csproj" />

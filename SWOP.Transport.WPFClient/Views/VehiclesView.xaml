@@ -38,24 +38,64 @@
         <vm:VehiclesViewModel />
     </Page.DataContext>-->
 
-    <Grid Background="SteelBlue">
+    <Grid>
 
-        <ListBox ItemsSource="{Binding Path=Vehicles}"
-             SelectedItem="{Binding SelectedVehicle}">
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="{x:Type m:Vehicle}">
-                    <StackPanel Orientation="Horizontal">
-                        <!--<Label Width="200" Background="{StaticResource MyBackgroundBrush}" Content="{Binding Brand}" />-->
-                        <Label Content="{Binding Brand}" />
-                        <Label Content="{Binding Model}" />
-                        <Label Style="{StaticResource HighlightLabelStyle}"
-                               Content="{Binding PlateNumber}" />
-                        <Label Content="{Binding Type}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
+        <DockPanel>
+
+            <StackPanel DockPanel.Dock="Top" Margin="5">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>    
+             
+                
+                    <Label Grid.Column="0" Grid.Row="0">Brand</Label>
+                    <Label Grid.Column="0" Grid.Row="1">Model</Label>
+                    <Label Grid.Column="0" Grid.Row="2">PlateNumber</Label>
+                    <Label Grid.Column="0" Grid.Row="3">From</Label>
+                    <Label Grid.Column="0" Grid.Row="4">To</Label>
+
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Criteria.Brand}" />
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Criteria.Model}" />
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Criteria.PlateNumber}" />
+                    <DatePicker Grid.Column="1" Grid.Row="3" SelectedDate="{Binding Criteria.Period.From}" />
+                    <DatePicker Grid.Column="1" Grid.Row="4" SelectedDate="{Binding Criteria.Period.To}" />
+                   
+
+                </Grid>
+
+                <Button Height="50" Content="Search" Command="{Binding SearchCommand}" />
+
+            </StackPanel>
+
+            <ListBox ItemsSource="{Binding Path=Vehicles}"
+                 SelectedItem="{Binding SelectedVehicle}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type m:Vehicle}">
+                        <StackPanel Orientation="Horizontal">
+                            <!--<Label Width="200" Background="{StaticResource MyBackgroundBrush}" Content="{Binding Brand}" />-->
+                            <Label Content="{Binding Brand}" />
+                            <Label Content="{Binding Model}" />
+                            <Label Style="{StaticResource HighlightLabelStyle}"
+                                   Content="{Binding PlateNumber}" />
+                            <Label Content="{Binding Type}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
            
-        </ListBox>
+            </ListBox>
+
+        </DockPanel>
 
         <!--<DataGrid ItemsSource="{Binding Vehicles}"
                   SelectedItem="{Binding SelectedVehicle}"

@@ -18,8 +18,43 @@ namespace SWOP.Transport.FakeRepositories
 
         public ICollection<Vehicle> Get(VehicleSearchCriteria criteria)
         {
-            throw new NotImplementedException();
+            IEnumerable<Vehicle> results = entities;
+
+            //results = results
+            //    .Where(p => !string.IsNullOrEmpty(criteria.Brand) && p.Brand == criteria.Brand)
+            //    .Where(p => !string.IsNullOrEmpty(criteria.Model) && p.Model == criteria.Model)
+            //    .ToList();
+
+            if (!string.IsNullOrEmpty(criteria.Brand))
+            {
+                results = results.Where(p => p.Brand == criteria.Brand);
+            }
+
+            if (!string.IsNullOrEmpty(criteria.Model))
+            {
+                results = results.Where(p => p.Model == criteria.Model);
+            }
+
+            if (!string.IsNullOrEmpty(criteria.PlateNumber))
+            {
+                results = results.Where(p => p.PlateNumber.Contains(criteria.PlateNumber));
+            }
+
+            if (criteria.Period.From.HasValue)
+            {
+                results = results.Where(p => p.CreatedAt >= criteria.Period.From);
+            }
+
+            if (criteria.Period.To.HasValue)
+            {
+                results = results.Where(p => p.CreatedAt <= criteria.Period.To);
+            }
+
+            return results.ToList();
         }
+
+
+      
     }
 
     

@@ -17,7 +17,8 @@ namespace SWOP.Transport.FakeRepositories.Fakers
             RuleFor(p => p.PlateNumber, f => f.Lorem.Letter(2).ToUpper() + f.Random.Number(1000, 9999).ToString());
             RuleFor(p => p.IsRemoved, f => f.Random.Bool(0.3f));
             RuleFor(p => p.Type, f => f.PickRandom<VehicleType>());
-            Ignore(p => p.CreatedAt);
+            RuleFor(p => p.CreatedAt, f => f.Date.Past(5));
+          //  Ignore(p => p.CreatedAt);
         }
     }
 }

@@ -4,10 +4,7 @@
     {
         public Grade Grade { get; set; }
 
-        public override decimal Calculate()
-        {            
-            return base.Calculate() + 100;
-        }
+        public override decimal Calculate() => base.Calculate() + 100;
 
         //public new decimal Calculate()
         //{
