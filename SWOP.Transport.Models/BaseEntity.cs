@@ -5,13 +5,30 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace SWOP.Transport.Models
 {
 
-    public abstract class Base : INotifyDataErrorInfo
+    public abstract class Base : INotifyDataErrorInfo, INotifyPropertyChanged
     {
+        #region INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                OnErrorsChanged(propertyName);
+
+
+            }
+
+        }
+        #endregion
+
         // PM> Install-Package FluentValidation
         // PM> Install-Package FluentValidation.ValidatorAttribute
 
@@ -20,6 +37,8 @@ namespace SWOP.Transport.Models
         public bool HasErrors => !(validator?.Validate(this).IsValid ?? true);
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+    
 
         public IEnumerable GetErrors(string propertyName)
         {
@@ -34,6 +53,12 @@ namespace SWOP.Transport.Models
 
             return result.Errors;
         }
+
+        protected void OnErrorsChanged(string propertyName)
+        {
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        }
+
     }
 
     public abstract class BaseEntity : Base

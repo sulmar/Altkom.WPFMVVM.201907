@@ -36,7 +36,7 @@ namespace SWOP.Transport.ViewModels
 
             this.Criteria = new VehicleSearchCriteria();
 
-            SearchCommand = new RelayCommand(() => Search(), ()=>CanSearch);
+            SearchCommand = new RelayCommand(() => Search());
 
            // Vehicles = vehicleRepository.Get();
         }

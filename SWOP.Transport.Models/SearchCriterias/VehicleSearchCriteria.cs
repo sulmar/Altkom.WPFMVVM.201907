@@ -15,8 +15,25 @@ namespace SWOP.Transport.Models.SearchCriterias
     [Validator(typeof(VehicleSearchCriteriaValidator))]
     public class VehicleSearchCriteria : Base
     {
-        public string Model { get; set; }
-        public string Brand { get; set; }
+        private string _model;
+        private string _brand;
+
+        public string Model
+        {
+            get => _model; set
+            {
+                _model = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Brand
+        {
+            get => _brand; set
+            {
+                _brand = value;
+                OnPropertyChanged();
+            }
+        }
         public string PlateNumber { get; set; }
         public DateRange Period { get; set; }
 
