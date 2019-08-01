@@ -156,5 +156,10 @@
   <ItemGroup>
     <Resource Include="Images\wpf.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Profiles.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

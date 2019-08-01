@@ -22,8 +22,8 @@
             <StackPanel
                 HorizontalAlignment="Center"
                 DockPanel.Dock="Bottom" Orientation="Horizontal">
-                <Button Content="Login" />
-                <Button Content="Cancel" Style="{StaticResource CancelButtonStyle}" />
+                <Button Content="Login" Command="{Binding LoginCommand}" />
+                <Button Content="Cancel" Command="{Binding CancelCommand}" Style="{StaticResource CancelButtonStyle}" />
             </StackPanel>
             
             <!-- Fields -->
@@ -40,14 +40,16 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Label Content="Login" />
+                <Label Content="User name" />
                 <Label Content="Password" Grid.Row="1" />
                 <Label Content="Profile" Grid.Row="2" />
 
-                <TextBox Name="LoginTextBox" Text="podaj login" Grid.Column="1" />
-                <TextBox Text="podaj hasło" Grid.Column="1" Grid.Row="1" />
+                <TextBox Name="LoginTextBox" Text="{Binding UserName}" Grid.Column="1" />
+                <TextBox Text="{Binding Password}" Grid.Column="1" Grid.Row="1" />
                 <ComboBox Grid.Column="1" Grid.Row="2"
                           ItemsSource="{Binding Profiles}"
+                          SelectedItem="{Binding SelectedProfile}"
+                          DisplayMemberPath="Name"
                           />
             </Grid>
 
