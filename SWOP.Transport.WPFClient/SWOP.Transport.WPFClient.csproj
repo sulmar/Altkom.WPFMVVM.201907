@@ -76,6 +76,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FrameNavigationService.cs" />
+    <Compile Include="MyAuthorizeService.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="Views\EmployeesView.xaml.cs">
       <DependentUpon>EmployeesView.xaml</DependentUpon>

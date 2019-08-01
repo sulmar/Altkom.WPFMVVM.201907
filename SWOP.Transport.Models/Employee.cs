@@ -8,6 +8,10 @@ namespace SWOP.Transport.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public string UserName { get; set; }
+        public string HashPassword { get; set; }
+
         public void Print() => Console.WriteLine(FullName);
 
         public string FullName => $"{FirstName} {LastName}";

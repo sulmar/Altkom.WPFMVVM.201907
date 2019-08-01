@@ -36,6 +36,8 @@ namespace SWOP.Transport.WPFClient
             builder.RegisterType<FileProfileRepository>().As<IProfileRepository>();
 
             builder.RegisterType<FrameNavigationService>().As<INavigationService>().SingleInstance();
+            builder.RegisterType<MyAuthorizeService>().As<IAuthorizeService>();
+
 
             builder.RegisterType<VehicleFaker>();
 

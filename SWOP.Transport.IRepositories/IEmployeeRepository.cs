@@ -16,7 +16,7 @@ namespace SWOP.Transport.IRepositories
 
     public interface IEmployeeRepository : IEntityRepository<Employee>
     {
-
+        Employee Authorize(string username, string password);
     }
 
 }

@@ -14,16 +14,9 @@ namespace SWOP.Transport.FakeRepositories.Fakers
             RuleFor(p => p.FirstName, f => f.Person.FirstName);
             RuleFor(p => p.LastName, f => f.Person.LastName);
             RuleFor(p => p.Grade, f => f.PickRandom<Grade>());
-        }
-    }
-
-    public class CivilFaker : Faker<Civil>
-    {
-        public CivilFaker()
-        {
-            RuleFor(p => p.Id, f => f.IndexFaker);
-            RuleFor(p => p.FirstName, f => f.Person.FirstName);
-            RuleFor(p => p.LastName, f => f.Person.LastName);
+            //RuleFor(p => p.UserName, f => f.Person.UserName);
+            RuleFor(p => p.UserName, f => "altkom" + f.IndexFaker);
+            RuleFor(p => p.HashPassword, f => "12345");
         }
     }
 }

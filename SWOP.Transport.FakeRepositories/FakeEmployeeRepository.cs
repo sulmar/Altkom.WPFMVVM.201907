@@ -37,6 +37,12 @@ namespace SWOP.Transport.FakeRepositories
             throw new NotImplementedException();
         }
 
+        public Employee Authorize(string username, string password)
+        {
+            return employees
+                .SingleOrDefault(p => p.UserName == username && p.HashPassword == password);
+        }
+
         public ICollection<Employee> Get()
         {
             return employees;

@@ -24,12 +24,16 @@ namespace SWOP.Transport.ViewModels
 
         private IProfileRepository profileRepository;
         private INavigationService navigationService;
+        private IAuthorizeService authorizeService;
 
         public LoginViewModel(IProfileRepository profileRepository,
-            INavigationService navigationService)
+            INavigationService navigationService,
+            IAuthorizeService authorizeService
+            )
         {
             this.profileRepository = profileRepository;
             this.navigationService = navigationService;
+            this.authorizeService = authorizeService;
 
             Profiles = profileRepository.Get();
 
@@ -45,7 +49,16 @@ namespace SWOP.Transport.ViewModels
 
         private void Login()
         {
-            navigationService.Navigate("Vehicles");
+            if (authorizeService.IsValid(UserName, Password))
+            {
+                navigationService.Navigate("Vehicles");
+            }
+            else
+            {
+                Password = string.Empty;
+            }
+
+            
         }
     }
 }
