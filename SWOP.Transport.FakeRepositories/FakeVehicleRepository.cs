@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace SWOP.Transport.FakeRepositories
 {
-
+        
     public class FakeVehicleRepository : FakeEntityRepository<Vehicle>, IVehicleRepository
     {
         public FakeVehicleRepository(VehicleFaker faker) : base(faker)

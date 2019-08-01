@@ -28,6 +28,11 @@ namespace SWOP.Transport.WPFClient
 
             builder.RegisterType<FakeEmployeeRepository>().As<IEmployeeRepository>();
             builder.RegisterType<FakeVehicleRepository>().As<IVehicleRepository>();
+
+            //builder.RegisterGeneric(typeof(FakeEntityRepository<>))
+            //    .As(typeof(IEntityRepository<>));
+
+
             builder.RegisterType<FileProfileRepository>().As<IProfileRepository>();
 
             builder.RegisterType<FrameNavigationService>().As<INavigationService>().SingleInstance();
