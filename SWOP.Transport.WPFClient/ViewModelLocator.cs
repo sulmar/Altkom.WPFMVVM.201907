@@ -17,6 +17,7 @@ namespace SWOP.Transport.WPFClient
 
         public VehiclesViewModel VehiclesViewModel => new VehiclesViewModel(new FakeVehicleRepository(new FakeRepositories.Fakers.VehicleFaker()));
         public EmployeesViewModel EmployeesViewModel => new EmployeesViewModel(new FakeEmployeeRepository());
+        public LoginViewModel LoginViewModel => new LoginViewModel();
 
     }
 }
