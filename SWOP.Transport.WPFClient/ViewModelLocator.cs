@@ -15,9 +15,11 @@ namespace SWOP.Transport.WPFClient
 
         }
 
+        public ShellViewModel ShellViewModel => new ShellViewModel(new FrameNavigationService());
+
         public VehiclesViewModel VehiclesViewModel => new VehiclesViewModel(new FakeVehicleRepository(new FakeRepositories.Fakers.VehicleFaker()));
         public EmployeesViewModel EmployeesViewModel => new EmployeesViewModel(new FakeEmployeeRepository());
-        public LoginViewModel LoginViewModel => new LoginViewModel(new FileProfileRepository("profiles.txt"));
+        public LoginViewModel LoginViewModel => new LoginViewModel(new FileProfileRepository("profiles.txt"), new FrameNavigationService());
 
     }
 }

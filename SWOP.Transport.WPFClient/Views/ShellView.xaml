@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SWOP.Transport.WPFClient.Views"
+        DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ShellViewModel}"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800">
@@ -12,9 +13,8 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="File" >
-                    <MenuItem Header="_Load" />
-                    <MenuItem Header="_Vehicles" />
-                    <MenuItem Header="_Save" />
+                    <MenuItem Header="Show _Vehicles" Command="{Binding ShowViewCommand}" CommandParameter="Vehicles" />
+                    <MenuItem Header="Show _Employees" Command="{Binding ShowViewCommand}" CommandParameter="Employees" />
                 </MenuItem>
             </Menu>
 
@@ -24,7 +24,9 @@
                 <StatusBarItem HorizontalAlignment="Right">Opcja 3</StatusBarItem>
             </StatusBar>
 
-            <Frame Source="LoginView.xaml" />
+            <Frame Source="LoginView.xaml" Name="MainFrame"
+                   NavigationUIVisibility="Hidden"
+                   />
         </DockPanel>
 
     </Grid>

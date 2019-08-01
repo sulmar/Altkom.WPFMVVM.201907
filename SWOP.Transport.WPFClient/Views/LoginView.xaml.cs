@@ -25,7 +25,7 @@ namespace SWOP.Transport.WPFClient.Views
         {
             InitializeComponent();
 
-            Thread.CurrentPrincipal
+            
         }
     }
 }

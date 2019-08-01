@@ -21,7 +21,7 @@ namespace SWOP.Transport.WPFClient.Views
     {
         public ShellView()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
     }
 }

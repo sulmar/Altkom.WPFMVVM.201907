@@ -23,10 +23,13 @@ namespace SWOP.Transport.ViewModels
 
 
         private IProfileRepository profileRepository;
+        private INavigationService navigationService;
 
-        public LoginViewModel(IProfileRepository profileRepository)
+        public LoginViewModel(IProfileRepository profileRepository,
+            INavigationService navigationService)
         {
             this.profileRepository = profileRepository;
+            this.navigationService = navigationService;
 
             Profiles = profileRepository.Get();
 
@@ -42,9 +45,7 @@ namespace SWOP.Transport.ViewModels
 
         private void Login()
         {
-            System.Threading.Thread.CurrentPrincipal
-           
-            
+            navigationService.Navigate("Vehicles");
         }
     }
 }
