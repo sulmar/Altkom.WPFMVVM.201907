@@ -11,6 +11,11 @@ namespace SWOP.Transport.WPFClient
 {
     public class FrameNavigationService : INavigationService
     {
+        public FrameNavigationService()
+        {
+
+        }
+
         public void GoBack()
         {
             Frame frame = Get("MainFrame");

@@ -28,7 +28,7 @@ namespace SWOP.Transport.ViewModels
         private IEmployeeRepository employeeRepository;
         private Employee _selectedEmployee;
 
-        public EmployeesViewModel(IEmployeeRepository employeeRepository)
+        public EmployeesViewModel(IEmployeeRepository employeeRepository, INavigationService navigationService)
         {
             this.employeeRepository = employeeRepository;
 

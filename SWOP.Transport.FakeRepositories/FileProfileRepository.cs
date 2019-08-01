@@ -11,7 +11,7 @@ namespace SWOP.Transport.FakeRepositories
     {
         private string filename;
 
-        public FileProfileRepository(string filename)
+        public FileProfileRepository(string filename = "profiles.txt")
         {
             this.filename = filename;
         }
