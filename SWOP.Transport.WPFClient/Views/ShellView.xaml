@@ -11,15 +11,15 @@
     <Grid>
 
         <DockPanel>
-            <Menu DockPanel.Dock="Top">
+            <Menu DockPanel.Dock="Top" IsEnabled="{Binding IsAuthenticated}">
                 <MenuItem Header="File" >
                     <MenuItem Header="Show _Vehicles" Command="{Binding ShowViewCommand}" CommandParameter="Vehicles" />
                     <MenuItem Header="Show _Employees" Command="{Binding ShowViewCommand}" CommandParameter="Employees" />
                 </MenuItem>
             </Menu>
 
-            <StatusBar DockPanel.Dock="Bottom" Height="25" >
-                <StatusBarItem>Opcja 1</StatusBarItem>
+            <StatusBar DockPanel.Dock="Bottom" Height="25" Visibility="Visible" >
+                <StatusBarItem Content="{Binding IsAuthenticated}"></StatusBarItem>
                 <StatusBarItem>Opcja 2</StatusBarItem>
                 <StatusBarItem HorizontalAlignment="Right">Opcja 3</StatusBarItem>
             </StatusBar>

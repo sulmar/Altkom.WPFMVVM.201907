@@ -12,6 +12,8 @@ namespace SWOP.Transport.FakeRepositories.Fakers
             RuleFor(p => p.LastName, f => f.Person.LastName);
             RuleFor(p => p.UserName, f => "altkom" + f.IndexFaker + 100);
             RuleFor(p => p.HashPassword, f => "54321");
+            RuleFor(p => p.Phone, f => f.Person.Phone);
+            RuleFor(p => p.Email, (f, e) => $"{e.FirstName}.{e.LastName}@altkom.pl");
         }
     }
 }
