@@ -9,6 +9,7 @@ namespace SWOP.Transport.ViewModels
         bool IsValid(string username, string password);
         bool IsInRole(string role);
         bool IsAuthenticated { get; }
+        string UserName { get; }
 
         event EventHandler AuthenticatedChanged;
     }

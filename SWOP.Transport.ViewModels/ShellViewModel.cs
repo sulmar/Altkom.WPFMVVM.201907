@@ -16,6 +16,7 @@ namespace SWOP.Transport.ViewModels
         public ICommand ShowViewCommand { get; private set; }
 
         public bool IsAuthenticated => authorizeService.IsAuthenticated;
+        public string UserName => authorizeService.UserName;
 
 
         public ShellViewModel(INavigationService navigationService, IAuthorizeService authorizeService)
@@ -35,6 +36,7 @@ namespace SWOP.Transport.ViewModels
         private void AuthorizeService_AuthenticatedChanged(object sender, EventArgs e)
         {
             OnPropertyChanged(nameof(IsAuthenticated));
+            OnPropertyChanged(nameof(UserName));
         }
 
         private void ShowView(string viewname) => navigationService.Navigate(viewname);

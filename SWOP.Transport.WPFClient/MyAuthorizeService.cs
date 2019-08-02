@@ -23,6 +23,8 @@ namespace SWOP.Transport.WPFClient
 
         public bool IsAuthenticated => Thread.CurrentPrincipal.Identity.IsAuthenticated;
 
+        public string UserName => Thread.CurrentPrincipal.Identity.Name;
+
         public event EventHandler AuthenticatedChanged;
 
         public bool IsInRole(string role) => Thread.CurrentPrincipal.IsInRole(role);
