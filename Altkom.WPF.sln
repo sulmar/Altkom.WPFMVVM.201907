@@ -7,13 +7,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altkom.WPF", "Altkom.WPF\Al
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWOP.Transport.WPFClient", "SWOP.Transport.WPFClient\SWOP.Transport.WPFClient.csproj", "{EC527656-C7DC-41C4-B473-4A12118E6F6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWOP.Transport.Models", "SWOP.Transport.Models\SWOP.Transport.Models.csproj", "{0C4A3B26-0839-43C1-A942-645A3FC8C996}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWOP.Transport.Models", "SWOP.Transport.Models\SWOP.Transport.Models.csproj", "{0C4A3B26-0839-43C1-A942-645A3FC8C996}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWOP.Transport.ViewModels", "SWOP.Transport.ViewModels\SWOP.Transport.ViewModels.csproj", "{6DA15675-B169-453F-A56E-ADB604B82700}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWOP.Transport.ViewModels", "SWOP.Transport.ViewModels\SWOP.Transport.ViewModels.csproj", "{6DA15675-B169-453F-A56E-ADB604B82700}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWOP.Transport.IRepositories", "SWOP.Transport.IRepositories\SWOP.Transport.IRepositories.csproj", "{9F2E012F-55E4-45C9-9BE1-44F029EB3DD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWOP.Transport.IRepositories", "SWOP.Transport.IRepositories\SWOP.Transport.IRepositories.csproj", "{9F2E012F-55E4-45C9-9BE1-44F029EB3DD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWOP.Transport.FakeRepositories", "SWOP.Transport.FakeRepositories\SWOP.Transport.FakeRepositories.csproj", "{4E4A1504-E068-4398-AAAA-C3C1D1D4DA3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWOP.Transport.FakeRepositories", "SWOP.Transport.FakeRepositories\SWOP.Transport.FakeRepositories.csproj", "{4E4A1504-E068-4398-AAAA-C3C1D1D4DA3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWOP.Resources", "SWOP.Resources\SWOP.Resources.csproj", "{170B3D56-0F5F-46B2-A83F-8C3A4AF2D1A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{4E4A1504-E068-4398-AAAA-C3C1D1D4DA3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E4A1504-E068-4398-AAAA-C3C1D1D4DA3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E4A1504-E068-4398-AAAA-C3C1D1D4DA3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{170B3D56-0F5F-46B2-A83F-8C3A4AF2D1A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{170B3D56-0F5F-46B2-A83F-8C3A4AF2D1A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{170B3D56-0F5F-46B2-A83F-8C3A4AF2D1A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{170B3D56-0F5F-46B2-A83F-8C3A4AF2D1A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

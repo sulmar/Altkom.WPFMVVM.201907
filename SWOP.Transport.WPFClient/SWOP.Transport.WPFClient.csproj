@@ -120,10 +120,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Resources\Styles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\EmployeesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -142,6 +138,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SWOP.Resources\SWOP.Resources.csproj">
+      <Project>{170b3d56-0f5f-46b2-a83f-8c3a4af2d1a2}</Project>
+      <Name>SWOP.Resources</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SWOP.Transport.FakeRepositories\SWOP.Transport.FakeRepositories.csproj">
       <Project>{4E4A1504-E068-4398-AAAA-C3C1D1D4DA3D}</Project>
       <Name>SWOP.Transport.FakeRepositories</Name>
@@ -166,6 +166,9 @@
     <Content Include="Profiles.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

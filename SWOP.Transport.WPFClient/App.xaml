@@ -10,7 +10,11 @@
             <local:ViewModelLocator x:Key="ViewModelLocator" />
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles.xaml" />
+                <!--<ResourceDictionary Source="Resources/Styles.xaml" />-->
+                
+                <!-- https://docs.microsoft.com/pl-pl/dotnet/framework/wpf/app-development/pack-uris-in-wpf-->
+                
+                <ResourceDictionary Source="pack://application:,,,/SWOP.Resources;component/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
