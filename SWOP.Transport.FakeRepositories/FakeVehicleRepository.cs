@@ -60,8 +60,10 @@ namespace SWOP.Transport.FakeRepositories
             return results.ToList();
         }
 
-
-      
+        public Task<ICollection<Vehicle>> GetAsync(VehicleSearchCriteria criteria)
+        {
+            return Task.Run(() => Get(criteria));
+        }
     }
 
     

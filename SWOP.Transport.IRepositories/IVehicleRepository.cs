@@ -3,6 +3,7 @@ using SWOP.Transport.Models.SearchCriterias;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SWOP.Transport.IRepositories
 {
@@ -18,6 +19,7 @@ namespace SWOP.Transport.IRepositories
     public interface IVehicleRepository : IEntityRepository<Vehicle>
     {
         ICollection<Vehicle> Get(VehicleSearchCriteria criteria);
+        Task<ICollection<Vehicle>> GetAsync(VehicleSearchCriteria criteria);
     }
 
     public interface IEntityRepository<TEntity>

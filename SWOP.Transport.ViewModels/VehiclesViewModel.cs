@@ -4,6 +4,7 @@ using SWOP.Transport.Models;
 using SWOP.Transport.Models.SearchCriterias;
 using SWOP.Transport.Models.Validators;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace SWOP.Transport.ViewModels
@@ -36,19 +37,20 @@ namespace SWOP.Transport.ViewModels
 
             this.Criteria = new VehicleSearchCriteria();
 
-            SearchCommand = new RelayCommand(() => Search());
+            SearchCommand = new RelayCommand(async () => await SearchAsync());
 
            // Vehicles = vehicleRepository.Get();
         }
 
-        private void Search()
+        private async Task SearchAsync()
         {
             IValidator validator = new VehicleSearchCriteriaValidator();
 
             var results = validator.Validate(Criteria);
-            
 
-            this.Vehicles = vehicleRepository.Get(Criteria);
+            // this.Vehicles = vehicleRepository.Get(Criteria);
+
+            this.Vehicles = await vehicleRepository.GetAsync(Criteria);
         }
 
 
