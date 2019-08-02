@@ -6,6 +6,7 @@ using SWOP.Transport.Models.SearchCriterias;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SWOP.Transport.FakeRepositories
 {
@@ -53,6 +54,8 @@ namespace SWOP.Transport.FakeRepositories
             {
                 results = results.Where(p => p.CreatedAt <= criteria.Period.To);
             }
+
+            Task.Delay(TimeSpan.FromSeconds(5)).Wait();
 
             return results.ToList();
         }

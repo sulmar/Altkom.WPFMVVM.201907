@@ -22,7 +22,8 @@
             <StackPanel
                 HorizontalAlignment="Center"
                 DockPanel.Dock="Bottom" Orientation="Horizontal">
-                <Button Content="Login" Command="{Binding LoginCommand}" />
+                <Button Content="Login" Command="{Binding LoginCommand}" Template="{StaticResource MyButtonTemplate}" 
+                        />
                 <Button Content="Cancel" Command="{Binding CancelCommand}" Style="{StaticResource CancelButtonStyle}" />
             </StackPanel>
             
