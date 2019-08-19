@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWOP.Resources", "SWOP.Reso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altkom.ConsoleClient", "Altkom.ConsoleClient\Altkom.ConsoleClient.csproj", "{BF20DC4D-CC6F-493E-8B19-A65304D80B81}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWOP.Transport.DbRepositories", "SWOP.Transport.DbRepositories\SWOP.Transport.DbRepositories.csproj", "{6E582562-BC56-4553-9749-E9A6497A50B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{BF20DC4D-CC6F-493E-8B19-A65304D80B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF20DC4D-CC6F-493E-8B19-A65304D80B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF20DC4D-CC6F-493E-8B19-A65304D80B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E582562-BC56-4553-9749-E9A6497A50B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E582562-BC56-4553-9749-E9A6497A50B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E582562-BC56-4553-9749-E9A6497A50B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E582562-BC56-4553-9749-E9A6497A50B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

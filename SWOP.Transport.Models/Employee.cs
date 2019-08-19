@@ -11,6 +11,7 @@ namespace SWOP.Transport.Models
 
         public string Email { get; set; }
         public string Phone { get; set; }
+        public string CellPhone { get; set; }
 
         public string UserName { get; set; }
         public string HashPassword { get; set; }
@@ -18,6 +19,8 @@ namespace SWOP.Transport.Models
         public void Print() => Console.WriteLine(FullName);
 
         public string FullName => $"{FirstName} {LastName}";
+
+        public IList<Vehicle> Vehicles { get; set; }
 
 
 

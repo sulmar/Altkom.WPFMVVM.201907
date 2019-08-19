@@ -1,10 +1,13 @@
 ﻿using Autofac;
+using SWOP.Transport.DbRepositories;
+using SWOP.Transport.DbRepositories.Initializers;
 using SWOP.Transport.FakeRepositories;
 using SWOP.Transport.FakeRepositories.Fakers;
 using SWOP.Transport.IRepositories;
 using SWOP.Transport.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +30,12 @@ namespace SWOP.Transport.WPFClient
                 .Where(t => t.IsSubclassOf(typeof(ViewModelBase)));
 
             builder.RegisterType<FakeEmployeeRepository>().As<IEmployeeRepository>();
-            builder.RegisterType<FakeVehicleRepository>().As<IVehicleRepository>();
+            // builder.RegisterType<FakeVehicleRepository>().As<IVehicleRepository>();
+
+            builder.RegisterType<DbVehicleRepository>().As<IVehicleRepository>();
+            builder.RegisterType<TransportContext>();
+
+            builder.RegisterType<TransportDbInitializer>().As<IDatabaseInitializer<TransportContext>>();
 
             //builder.RegisterGeneric(typeof(FakeEntityRepository<>))
             //    .As(typeof(IEntityRepository<>));
@@ -39,6 +47,8 @@ namespace SWOP.Transport.WPFClient
             builder.RegisterType<MyAuthorizeService>().As<IAuthorizeService>().SingleInstance();
 
             builder.RegisterType<VehicleFaker>();
+            builder.RegisterType<PolicemanFaker>();
+            builder.RegisterType<CivilFaker>();
 
             container = builder.Build();
         }

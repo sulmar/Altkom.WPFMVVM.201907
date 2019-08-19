@@ -55,7 +55,7 @@ namespace SWOP.Transport.FakeRepositories
                 results = results.Where(p => p.CreatedAt <= criteria.Period.To);
             }
 
-            Task.Delay(TimeSpan.FromSeconds(5)).Wait();
+            // Task.Delay(TimeSpan.FromSeconds(5)).Wait();
 
             return results.ToList();
         }

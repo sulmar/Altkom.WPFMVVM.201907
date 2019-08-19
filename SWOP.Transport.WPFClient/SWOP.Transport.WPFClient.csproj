@@ -41,6 +41,12 @@
     <Reference Include="Bogus, Version=28.0.2.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
       <HintPath>..\packages\Bogus.28.0.2\lib\net40\Bogus.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.8.4.0\lib\net45\FluentValidation.dll</HintPath>
     </Reference>
@@ -141,6 +147,10 @@
     <ProjectReference Include="..\SWOP.Resources\SWOP.Resources.csproj">
       <Project>{170b3d56-0f5f-46b2-a83f-8c3a4af2d1a2}</Project>
       <Name>SWOP.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SWOP.Transport.DbRepositories\SWOP.Transport.DbRepositories.csproj">
+      <Project>{6E582562-BC56-4553-9749-E9A6497A50B9}</Project>
+      <Name>SWOP.Transport.DbRepositories</Name>
     </ProjectReference>
     <ProjectReference Include="..\SWOP.Transport.FakeRepositories\SWOP.Transport.FakeRepositories.csproj">
       <Project>{4E4A1504-E068-4398-AAAA-C3C1D1D4DA3D}</Project>
