@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Configurations\EmployeeConfiguration.cs" />
     <Compile Include="Configurations\VehicleConfiguration.cs" />
+    <Compile Include="DbEmployeeRepository.cs" />
     <Compile Include="DbVehicleRepository.cs" />
     <Compile Include="Initializers\TransportDbInitializer.cs" />
     <Compile Include="MigrationsContextFactory.cs" />
