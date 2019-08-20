@@ -11,10 +11,7 @@ namespace SWOP.Transport.WPFClient
 {
     public class FrameNavigationService : INavigationService
     {
-        public FrameNavigationService()
-        {
-
-        }
+        public object Parameter { get; private set; }
 
         public void GoBack()
         {
@@ -34,7 +31,11 @@ namespace SWOP.Transport.WPFClient
 
             Uri uri = new Uri($"Views/{viewName}View.xaml", UriKind.Relative);
 
+            this.Parameter = parameter;
+
             frame.Navigate(uri, parameter);
+
+            
         }
 
         private Frame Get(string name)

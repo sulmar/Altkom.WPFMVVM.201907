@@ -29,9 +29,10 @@ namespace SWOP.Transport.WPFClient
             builder.RegisterAssemblyTypes(typeof(ViewModelBase).Assembly)
                 .Where(t => t.IsSubclassOf(typeof(ViewModelBase)));
 
-            builder.RegisterType<FakeEmployeeRepository>().As<IEmployeeRepository>();
+            //builder.RegisterType<FakeEmployeeRepository>().As<IEmployeeRepository>();
             // builder.RegisterType<FakeVehicleRepository>().As<IVehicleRepository>();
 
+            builder.RegisterType<DbEmployeeRepository>().As<IEmployeeRepository>();
             builder.RegisterType<DbVehicleRepository>().As<IVehicleRepository>();
             builder.RegisterType<TransportContext>();
 
@@ -62,6 +63,7 @@ namespace SWOP.Transport.WPFClient
         public LoginViewModel LoginViewModel => container.Resolve<LoginViewModel>();
         public VehiclesViewModel VehiclesViewModel => container.Resolve<VehiclesViewModel>();
         public EmployeesViewModel EmployeesViewModel => container.Resolve<EmployeesViewModel>();
+        public VehicleViewModel VehicleViewModel => container.Resolve<VehicleViewModel>();
 
     }
 }

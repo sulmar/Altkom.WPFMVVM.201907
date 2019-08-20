@@ -55,9 +55,24 @@
 
                 </Grid>
 
-                <Button Height="50" Content="Search" Command="{Binding SearchCommand}"
-                        Style="{StaticResource SearchButtonStyle}"
-                        />
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Center">
+                
+                    <Button Content="Search" 
+                            Command="{Binding SearchCommand}"
+                        Style="{StaticResource SearchButtonStyle}" />
+
+                    <Button Content="Add" 
+                            Command="{Binding AddCommand}" />
+                    
+                    <Button Content="Update"
+                            Command="{Binding UpdateCommand}" />
+                    
+                    <Button Content="Remove"
+                            Command="{Binding RemoveCommand}" />
+
+                </StackPanel>
+
 
             </StackPanel>
 

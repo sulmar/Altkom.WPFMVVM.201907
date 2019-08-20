@@ -9,6 +9,11 @@
       DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=LoginViewModel}"
       Title="LoginView">
 
+    <!--<Page.InputBindings>
+        <KeyBinding Key="Return" Command="{Binding LoginCommand}" />
+        <KeyBinding Key="Esc" Command="{Binding CancelCommand}" />
+    </Page.InputBindings>-->
+
     <Grid>
 
         <DockPanel>
@@ -23,8 +28,11 @@
                 HorizontalAlignment="Center"
                 DockPanel.Dock="Bottom" Orientation="Horizontal">
                 <Button Content="Login" Command="{Binding LoginCommand}" Template="{StaticResource MyButtonTemplate}" 
+                        IsDefault="True"
                         />
-                <Button Content="Cancel" Command="{Binding CancelCommand}" Style="{StaticResource CancelButtonStyle}" />
+                <Button Content="Cancel" Command="{Binding CancelCommand}" 
+                        IsCancel="True"
+                        Style="{StaticResource CancelButtonStyle}" />
             </StackPanel>
             
             <!-- Fields -->
@@ -45,8 +53,8 @@
                 <Label Content="Password" Grid.Row="1" />
                 <Label Content="Profile" Grid.Row="2" />
 
-                <TextBox Name="LoginTextBox" Text="{Binding UserName}" Grid.Column="1" />
-                <TextBox Text="{Binding Password}" Grid.Column="1" Grid.Row="1" />
+                <TextBox Name="LoginTextBox" Text="{Binding UserName}" Grid.Column="1" AcceptsReturn="False" />
+                <TextBox Text="{Binding Password}" Grid.Column="1" Grid.Row="1" AcceptsReturn="False" />
                 <ComboBox Grid.Column="1" Grid.Row="2"
                           ItemsSource="{Binding Profiles}"
                           SelectedItem="{Binding SelectedProfile}"

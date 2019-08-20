@@ -12,6 +12,11 @@ namespace SWOP.Transport.Models
         public VehicleType Type { get; set; }
 
         public Employee Owner { get; set; }
+
+        public Vehicle()
+        {
+            CreatedAt = DateTime.Now;
+        }
     }
 
     public enum VehicleType

@@ -97,6 +97,9 @@
     <Compile Include="Views\VehiclesView.xaml.cs">
       <DependentUpon>VehiclesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\VehicleView.xaml.cs">
+      <DependentUpon>VehicleView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -139,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\VehiclesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VehicleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

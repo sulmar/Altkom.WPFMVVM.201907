@@ -10,49 +10,47 @@ using System.Threading.Tasks;
 
 namespace SWOP.Transport.DbRepositories
 {
-    public class DbVehicleRepository : IVehicleRepository
+    public class DbVehicleRepository : DbEntityRepository<Vehicle>, IVehicleRepository
     {
-        private readonly TransportContext context;
-
-        public DbVehicleRepository(TransportContext context)
+        public DbVehicleRepository(TransportContext context) : base(context)
         {
-            this.context = context;
         }
 
-        public void Add(Vehicle entity)
+        public ICollection<Vehicle> Get(VehicleSearchCriteria criteria) => Query(criteria).ToList();
+
+        public async Task<ICollection<Vehicle>> GetAsync(VehicleSearchCriteria criteria) => await Query(criteria).ToListAsync();
+
+        private IQueryable<Vehicle> Query(VehicleSearchCriteria criteria)
         {
-            throw new NotImplementedException();
+            IQueryable<Vehicle> results = entities;
+
+            if (!string.IsNullOrEmpty(criteria.Brand))
+            {
+                results = results.Where(p => p.Brand == criteria.Brand);
+            }
+
+            if (!string.IsNullOrEmpty(criteria.Model))
+            {
+                results = results.Where(p => p.Model == criteria.Model);
+            }
+
+            if (!string.IsNullOrEmpty(criteria.PlateNumber))
+            {
+                results = results.Where(p => p.PlateNumber.Contains(criteria.PlateNumber));
+            }
+
+            if (criteria.Period.From.HasValue)
+            {
+                results = results.Where(p => p.CreatedAt >= criteria.Period.From);
+            }
+
+            if (criteria.Period.To.HasValue)
+            {
+                results = results.Where(p => p.CreatedAt <= criteria.Period.To);
+            }
+
+            return results;
         }
 
-        public ICollection<Vehicle> Get(VehicleSearchCriteria criteria)
-        {
-            return context.Vehicles.ToList();
-        }
-
-        public ICollection<Vehicle> Get()
-        {
-            return context.Vehicles.ToList();
-        }
-
-        public Vehicle Get(int id)
-        {
-            return context.Vehicles.Find(id);
-        }
-
-        public async Task<ICollection<Vehicle>> GetAsync(VehicleSearchCriteria criteria)
-        {
-            // using System.Data.Entity;
-            return await context.Vehicles.ToListAsync();
-        }
-
-        public void Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Vehicle entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -10,5 +10,7 @@ namespace SWOP.Transport.ViewModels
         void GoBack();
         void GoForward();
 
+        object Parameter { get; }
+
     }
 }
