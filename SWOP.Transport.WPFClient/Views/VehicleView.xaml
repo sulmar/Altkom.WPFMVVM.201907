@@ -47,12 +47,22 @@
                     <Label Grid.Column="0" Grid.Row="0">Brand</Label>
                     <Label Grid.Column="0" Grid.Row="1">Model</Label>
                     <Label Grid.Column="0" Grid.Row="2">PlateNumber</Label>
-                    <!--<Label Grid.Column="0" Grid.Row="3">From</Label>
-                    <Label Grid.Column="0" Grid.Row="4">To</Label>-->
+                    <Label Grid.Column="0" Grid.Row="3">Type</Label>
+                    <Label Grid.Column="0" Grid.Row="4">Owner</Label>
 
                     <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Vehicle.Brand}" />
                     <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Vehicle.Model}" />
                     <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Vehicle.PlateNumber}" />
+                    <ComboBox Grid.Column="1" Grid.Row="3" 
+                              ItemsSource="{Binding VehicleTypes}"
+                              SelectedItem="{Binding Vehicle.Type}"
+                              />
+                    
+                    <ComboBox Grid.Column="1" Grid.Row="4" 
+                              ItemsSource="{Binding Employees}"
+                              DisplayMemberPath="FullName"
+                              SelectedItem="{Binding Vehicle.Owner}"
+                              />
                     <!--<DatePicker Grid.Column="1" Grid.Row="3" SelectedDate="{Binding Criteria.Period.From}" />
                     <DatePicker Grid.Column="1" Grid.Row="4" SelectedDate="{Binding Criteria.Period.To}" />-->
 

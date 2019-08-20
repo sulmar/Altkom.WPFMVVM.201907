@@ -9,7 +9,7 @@ namespace SWOP.Transport.DbRepositories
     public class DbEntityRepository<TEntity> : IEntityRepository<TEntity>
         where TEntity : class
     {
-        private readonly TransportContext context;
+        protected readonly TransportContext context;
 
         public DbEntityRepository(TransportContext context)
         {
@@ -50,7 +50,12 @@ namespace SWOP.Transport.DbRepositories
 
         public virtual void Update(TEntity entity)
         {
+
             context.Entry(entity).State = EntityState.Modified;
+
+            
+            var entries = context.ChangeTracker.Entries();
+
             context.SaveChanges();
         }
     }

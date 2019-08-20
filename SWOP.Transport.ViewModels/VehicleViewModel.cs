@@ -2,6 +2,7 @@
 using SWOP.Transport.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
@@ -10,15 +11,24 @@ namespace SWOP.Transport.ViewModels
     public class VehicleViewModel : ViewModelBase
     {
         private readonly IVehicleRepository vehicleRepository;
+        private readonly IEmployeeRepository employeeRepository;
         private readonly INavigationService navigationService;
+
+
+        public IEnumerable<VehicleType> VehicleTypes => Enum.GetValues(typeof(VehicleType)).Cast<VehicleType>();
+
+        public IEnumerable<Employee> Employees { get; set; }
 
         public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
 
-        public VehicleViewModel(IVehicleRepository vehicleRepository, 
+        public VehicleViewModel(
+            IVehicleRepository vehicleRepository, 
+            IEmployeeRepository employeeRepository,
             INavigationService navigationService)
         {
             this.vehicleRepository = vehicleRepository;
+            this.employeeRepository = employeeRepository;
             this.navigationService = navigationService;
 
             SaveCommand = new RelayCommand(() => Save());
@@ -29,6 +39,8 @@ namespace SWOP.Transport.ViewModels
 
         private void Load()
         {
+            Employees = employeeRepository.Get();
+
             if (navigationService.Parameter==null)
             {
                 Vehicle = new Vehicle();

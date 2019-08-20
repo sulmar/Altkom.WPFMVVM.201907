@@ -23,6 +23,11 @@ namespace SWOP.Transport.Models
         public IList<Vehicle> Vehicles { get; set; }
 
 
+        public Employee()
+        {
+            CreatedAt = DateTime.Now;
+        }
+
 
         public virtual decimal Calculate()
         {

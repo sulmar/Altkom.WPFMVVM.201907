@@ -52,5 +52,19 @@ namespace SWOP.Transport.DbRepositories
             return results;
         }
 
+        public override void Update(Vehicle entity)
+        {
+            context.Entry(entity).State = EntityState.Modified;
+
+            context.Entry(entity.Owner).State = EntityState.Unchanged;
+
+            var entries = context.ChangeTracker.Entries();
+
+            context.SaveChanges();
+
+
+            // base.Update(entity);
+        }
+
     }
 }

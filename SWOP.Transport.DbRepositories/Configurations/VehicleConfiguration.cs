@@ -28,8 +28,8 @@ namespace SWOP.Transport.DbRepositories.Configurations
                 .IsRequired()
                 .IsUnicode(true);
 
-            Property(p => p.CreatedAt)
-                .HasColumnType("datetime2");
+            //Property(p => p.CreatedAt)
+            //    .HasColumnType("datetime2");
         }
     }
 }

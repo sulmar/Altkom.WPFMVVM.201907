@@ -1,4 +1,5 @@
 ﻿using SWOP.Transport.DbRepositories.Configurations;
+using SWOP.Transport.DbRepositories.Conventions;
 using SWOP.Transport.Models;
 using System;
 using System.Collections.Generic;
@@ -26,8 +27,17 @@ namespace SWOP.Transport.DbRepositories
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //modelBuilder.Properties<DateTime>()
+            //    .Configure(p => p.HasColumnType("datetime2"));
+
+            //modelBuilder.Conventions.Add(new DateTime2Convention());
+            modelBuilder.Conventions.Add<DateTime2Convention>();
+
             modelBuilder.Configurations.Add(new VehicleConfiguration());
             modelBuilder.Configurations.Add(new EmployeeConfiguration());
+
+            
+
 
             base.OnModelCreating(modelBuilder);
         }
