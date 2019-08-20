@@ -34,7 +34,7 @@ namespace SWOP.Transport.WPFClient
 
             builder.RegisterType<DbEmployeeRepository>().As<IEmployeeRepository>();
             builder.RegisterType<DbVehicleRepository>().As<IVehicleRepository>();
-            builder.RegisterType<TransportContext>();
+            builder.RegisterType<TransportContext>().SingleInstance();
 
             builder.RegisterType<TransportDbInitializer>().As<IDatabaseInitializer<TransportContext>>();
 
