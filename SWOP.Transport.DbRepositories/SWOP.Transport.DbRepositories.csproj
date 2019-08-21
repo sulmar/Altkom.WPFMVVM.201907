@@ -57,6 +57,7 @@
     <Compile Include="Conventions\KeyConvention.cs" />
     <Compile Include="DbEmployeeRepository.cs" />
     <Compile Include="DbEntityRepository.cs" />
+    <Compile Include="DbReportRepository.cs" />
     <Compile Include="DbRoleRepository.cs" />
     <Compile Include="DbVehicleRepository.cs" />
     <Compile Include="Initializers\TransportDbInitializer.cs" />

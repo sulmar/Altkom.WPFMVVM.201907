@@ -54,6 +54,9 @@ namespace SWOP.Transport.WPFClient
             builder.RegisterType<FakeRoleRepository>();
             builder.RegisterType<DbRoleRepository>().As<IRoleRepository>();
 
+            builder.RegisterType<DbReportRepository>().As<IReportRepository>();
+
+
             container = builder.Build();
         }
 
@@ -67,6 +70,7 @@ namespace SWOP.Transport.WPFClient
         public VehiclesViewModel VehiclesViewModel => container.Resolve<VehiclesViewModel>();
         public EmployeesViewModel EmployeesViewModel => container.Resolve<EmployeesViewModel>();
         public VehicleViewModel VehicleViewModel => container.Resolve<VehicleViewModel>();
+        public ReportViewModel ReportViewModel => container.Resolve<ReportViewModel>();
 
     }
 }

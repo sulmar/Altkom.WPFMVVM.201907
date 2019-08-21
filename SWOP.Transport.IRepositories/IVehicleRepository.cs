@@ -20,6 +20,7 @@ namespace SWOP.Transport.IRepositories
     {
         ICollection<Vehicle> Get(VehicleSearchCriteria criteria);
         Task<ICollection<Vehicle>> GetAsync(VehicleSearchCriteria criteria);
+
     }
 
     public interface IEntityRepository<TEntity>

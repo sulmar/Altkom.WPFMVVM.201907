@@ -21,6 +21,7 @@
                 <MenuItem Header="File" >
                     <MenuItem Header="Show _Vehicles" Command="{Binding ShowViewCommand}" CommandParameter="Vehicles" />
                     <MenuItem Header="Show _Employees" Command="{Binding ShowViewCommand}" CommandParameter="Employees" />
+                    <MenuItem Header="Show _Report" Command="{Binding ShowViewCommand}" CommandParameter="Report" />
                 </MenuItem>
             </Menu>
 
