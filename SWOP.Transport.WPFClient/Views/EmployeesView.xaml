@@ -21,6 +21,13 @@
                 <Button Content="Calculate" />
             </StackPanel>
 
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                
+            <!-- Employees -->
             <ListBox ItemsSource="{Binding Employees}"
                      SelectedItem="{Binding SelectedEmployee}"
                      >
@@ -35,6 +42,12 @@
                 </ListBox.ItemTemplate>
             </ListBox>
 
+
+            <DataGrid Grid.Row="1" 
+                      AutoGenerateColumns="True"
+                    ItemsSource="{Binding SelectedEmployee.Roles}" />
+
+            </Grid>
 
          
 

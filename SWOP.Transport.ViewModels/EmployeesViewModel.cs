@@ -17,6 +17,7 @@ namespace SWOP.Transport.ViewModels
             set
             {
                 _selectedEmployee = value;
+                OnPropertyChanged();
 
                 SendCommand?.OnCanExecuteChanged();
             }

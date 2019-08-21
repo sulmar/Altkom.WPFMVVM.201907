@@ -22,6 +22,8 @@ namespace SWOP.Transport.Models
 
         public IList<Vehicle> Vehicles { get; set; }
 
+        public ICollection<Role> Roles { get; set; }
+
 
         public Employee()
         {

@@ -14,11 +14,16 @@ namespace SWOP.Transport.WPFClient
 {
     public class MyAuthorizeService : IAuthorizeService
     {
-        private IEmployeeRepository employeeRepository;
+        private readonly IEmployeeRepository employeeRepository;
+        private readonly IRoleRepository roleRepository;
 
-        public MyAuthorizeService(IEmployeeRepository employeeRepository)
+        public MyAuthorizeService(
+            IEmployeeRepository employeeRepository,
+            IRoleRepository roleRepository
+            )
         {
             this.employeeRepository = employeeRepository;
+            this.roleRepository = roleRepository;
         }
 
         public bool IsAuthenticated => Thread.CurrentPrincipal.Identity.IsAuthenticated;
@@ -33,17 +38,25 @@ namespace SWOP.Transport.WPFClient
         {
             Employee employee = employeeRepository.Authorize(username, password);
 
-            if (employee != null)
+            var roles = roleRepository.GetByEmployee(employee);
+
+             if (employee != null)
             {
-                IList<Claim> claims = new List<Claim>
+                IList<Claim> employeeClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, employee.FullName),
                     new Claim(ClaimTypes.Surname, employee.LastName),
                     new Claim(ClaimTypes.MobilePhone, employee.Phone),
                     new Claim(ClaimTypes.Email, employee.Email),
-                    new Claim(ClaimTypes.Role, "developer"),
-                    new Claim(ClaimTypes.Role, "trainer"),
+                    //new Claim(ClaimTypes.Role, "developer"),
+                    //new Claim(ClaimTypes.Role, "trainer"),
                 };
+
+                IList<Claim> roleClaims = roles
+                    .Select(r => new Claim(ClaimTypes.Role, r.Name))
+                    .ToList();
+
+                var claims = employeeClaims.Concat(roleClaims).ToList();
 
                 IIdentity identity = new ClaimsIdentity(claims, "altkom");
 

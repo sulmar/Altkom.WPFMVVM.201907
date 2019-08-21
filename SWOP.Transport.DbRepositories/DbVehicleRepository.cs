@@ -18,7 +18,7 @@ namespace SWOP.Transport.DbRepositories
 
         public ICollection<Vehicle> Get(VehicleSearchCriteria criteria) => Query(criteria).ToList();
 
-        public async Task<ICollection<Vehicle>> GetAsync(VehicleSearchCriteria criteria) => await Query(criteria).ToListAsync();
+        public async Task<ICollection<Vehicle>> GetAsync(VehicleSearchCriteria criteria) => await Query(criteria).AsNoTracking().ToListAsync();
 
         private IQueryable<Vehicle> Query(VehicleSearchCriteria criteria)
         {
@@ -49,11 +49,23 @@ namespace SWOP.Transport.DbRepositories
                 results = results.Where(p => p.CreatedAt <= criteria.Period.To);
             }
 
+            results = results
+                .OrderBy(p => p.Id);
+
+            /* eager loading
+             
+            results = results
+                .Include(p => p.Owner); 
+
+            */
+
             return results;
         }
 
         public override void Update(Vehicle entity)
         {
+            Console.WriteLine(context.Entry(entity).State);
+            
             context.Entry(entity).State = EntityState.Modified;
 
             context.Entry(entity.Owner).State = EntityState.Unchanged;
@@ -62,8 +74,34 @@ namespace SWOP.Transport.DbRepositories
 
             context.SaveChanges();
 
+            Console.WriteLine(context.Entry(entity).State);
+
 
             // base.Update(entity);
+        }
+
+        public override Vehicle Get(int id)
+        {
+            Vehicle vehicle = base.Get(id);
+
+            // explicit loading
+
+            // discret
+            context.Entry(vehicle).Reference(p => p.Owner).Load();
+
+            // collection
+            // context.Entry(vehicle).Collection(p => p.Deadlines).Load();
+
+            // filter
+            context.Entry(vehicle)
+                .Collection(p => p.Deadlines)
+                .Query()
+                .Where(p=>p.Date < DateTime.Now)
+                .Load();
+
+            // return base.Get(id);
+
+            return vehicle;
         }
 
     }

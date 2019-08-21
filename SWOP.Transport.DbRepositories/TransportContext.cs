@@ -10,19 +10,24 @@ using System.Threading.Tasks;
 
 namespace SWOP.Transport.DbRepositories
 {
-
-
     public class TransportContext : DbContext        
     {
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Employee> Employees { get; set; }
-
+        public DbSet<Role> Roles { get; set; }
 
 
         public TransportContext(IDatabaseInitializer<TransportContext> initializer)
                : base("TransportConnection")
         {
             Database.SetInitializer(initializer);
+
+            // Lazy Loading
+            //this.Configuration.LazyLoadingEnabled = true;
+            //this.Configuration.ProxyCreationEnabled = true;
+
+
+            // this.Configuration.AutoDetectChangesEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -87,6 +87,7 @@
                             <Label Style="{StaticResource HighlightLabelStyle}"
                                    Content="{Binding PlateNumber}" />
                             <Label Content="{Binding Type}" />
+                            <Label Content="{Binding Owner.FullName}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

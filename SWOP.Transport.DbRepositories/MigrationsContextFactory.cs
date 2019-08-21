@@ -11,7 +11,8 @@ namespace SWOP.Transport.DbRepositories
             return new TransportContext(new TransportDbInitializer(
                     new VehicleFaker(),
                     new PolicemanFaker(),
-                    new CivilFaker()
+                    new CivilFaker(),
+                    new FakeRepositories.FakeRoleRepository()
                     ));
         }
     }

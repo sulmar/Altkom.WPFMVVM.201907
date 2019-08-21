@@ -68,6 +68,17 @@
 
 
                 </Grid>
+
+                <DataGrid 
+                    ItemsSource="{Binding Vehicle.Deadlines}"
+                    AutoGenerateColumns="False" >
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
+                        <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
+                    </DataGrid.Columns>
+
+                </DataGrid>
             </StackPanel>
             
             

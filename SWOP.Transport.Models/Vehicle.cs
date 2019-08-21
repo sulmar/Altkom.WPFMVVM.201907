@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SWOP.Transport.Models
 {
@@ -12,6 +13,11 @@ namespace SWOP.Transport.Models
         public VehicleType Type { get; set; }
 
         public Employee Owner { get; set; }
+
+        public ICollection<Deadline> Deadlines { get; set; }
+
+        // Lazy loading
+        // public virtual Employee Owner { get; set; }
 
         public Vehicle()
         {

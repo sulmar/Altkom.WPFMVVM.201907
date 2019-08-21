@@ -50,13 +50,17 @@ namespace SWOP.Transport.DbRepositories
 
         public virtual void Update(TEntity entity)
         {
+            Console.WriteLine(context.Entry(entity).State);
 
             context.Entry(entity).State = EntityState.Modified;
 
-            
+            Console.WriteLine(context.Entry(entity).State);
+
             var entries = context.ChangeTracker.Entries();
 
             context.SaveChanges();
+
+            Console.WriteLine(context.Entry(entity).State);
         }
     }
 }

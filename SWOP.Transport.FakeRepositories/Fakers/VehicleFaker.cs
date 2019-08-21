@@ -19,6 +19,9 @@ namespace SWOP.Transport.FakeRepositories.Fakers
             RuleFor(p => p.Type, f => f.PickRandom<VehicleType>());
             RuleFor(p => p.CreatedAt, f => f.Date.Past(5));
             Ignore(p => p.Owner);
+            Ignore(p => p.ModifiedAt);
+            Ignore(p => p.Deadlines);
+
         }
     }
 }

@@ -51,6 +51,9 @@ namespace SWOP.Transport.WPFClient
             builder.RegisterType<PolicemanFaker>();
             builder.RegisterType<CivilFaker>();
 
+            builder.RegisterType<FakeRoleRepository>();
+            builder.RegisterType<DbRoleRepository>().As<IRoleRepository>();
+
             container = builder.Build();
         }
 

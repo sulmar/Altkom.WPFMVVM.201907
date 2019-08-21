@@ -24,7 +24,8 @@
                 </MenuItem>
             </Menu>
 
-            <StatusBar DockPanel.Dock="Bottom" Height="25" Visibility="{Binding IsAuthenticated,Converter={StaticResource MyConverter}}" >
+            <StatusBar                 
+                DockPanel.Dock="Bottom" Height="25" Visibility="{Binding IsAuthenticated,Converter={StaticResource MyConverter}}" >
                 <StatusBarItem Content="{Binding IsAuthenticated}" Visibility="{Binding IsAuthenticated, Converter={c:BoolToVisibiltyConverter}}" />
                 <StatusBarItem Content="{Binding UserName}" />
                 <StatusBarItem HorizontalAlignment="Right">Opcja 3</StatusBarItem>

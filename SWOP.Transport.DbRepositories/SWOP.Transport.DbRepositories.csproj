@@ -57,6 +57,7 @@
     <Compile Include="Conventions\KeyConvention.cs" />
     <Compile Include="DbEmployeeRepository.cs" />
     <Compile Include="DbEntityRepository.cs" />
+    <Compile Include="DbRoleRepository.cs" />
     <Compile Include="DbVehicleRepository.cs" />
     <Compile Include="Initializers\TransportDbInitializer.cs" />
     <Compile Include="MigrationsContextFactory.cs" />
@@ -71,6 +72,14 @@
     <Compile Include="Migrations\201908201141563_AddCreateAtModifiedAtToBaseEntity.cs" />
     <Compile Include="Migrations\201908201141563_AddCreateAtModifiedAtToBaseEntity.Designer.cs">
       <DependentUpon>201908201141563_AddCreateAtModifiedAtToBaseEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908210729594_AddDeadline.cs" />
+    <Compile Include="Migrations\201908210729594_AddDeadline.Designer.cs">
+      <DependentUpon>201908210729594_AddDeadline.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908210841166_AddRoles.cs" />
+    <Compile Include="Migrations\201908210841166_AddRoles.Designer.cs">
+      <DependentUpon>201908210841166_AddRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,6 +112,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908201141563_AddCreateAtModifiedAtToBaseEntity.resx">
       <DependentUpon>201908201141563_AddCreateAtModifiedAtToBaseEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908210729594_AddDeadline.resx">
+      <DependentUpon>201908210729594_AddDeadline.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908210841166_AddRoles.resx">
+      <DependentUpon>201908210841166_AddRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
