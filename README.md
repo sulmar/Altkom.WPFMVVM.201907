@@ -574,26 +574,20 @@ var orderHeaders = db.Database.SqlQuery(
 # Indeksy
 
 ~~~ csharp
-x.Entity<Token>()
-    .HasIndex(d => new { d.ServiceKey, d.ExternalId })
-    .HasName("IX_ServiceKey_ExternalId")
-    .HasFilter(null)
-    .IsUnique(true);
-~~~
 
-
-# Domyślne wartości
-
-~~~ csharp
-
-protected override void OnModelCreating(ModelBuilder modelBuilder)
+class EmployeeConfiguration : EntityTypeConfiguration<Employee>
 {
-    modelBuilder.Entity<Employee>()
-        .Property(b => b.CreatedDate)
-        .HasDefaultValueSql("CONVERT(date, GETDATE())");
+    public EmployeeConfiguration()
+    {
+
+        HasIndex(p => p.Email)                
+            .IsUnique();
+
+    }
 }
 
 ~~~
+
 
 
 
