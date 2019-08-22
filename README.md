@@ -955,3 +955,103 @@ var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enab
 ~~~
 
         
+
+## Współbieżność
+
+### Token
+
+#### Konfiguracja za pomocą atrybutu
+
+~~~ csharp
+public class Employee
+   {
+       public int Id { get; set; }
+ 
+       [ConcurrencyCheck]
+       public string FirstName { get; set; }
+       public string LastName { get; set; }
+   }
+~~~
+
+#### Konfiguracja za pomocą FluentAPI
+
+~~~ csharp
+class EmployeeConfiguration : EntityTypeConfiguration<Employee>
+    {
+        public EmployeeConfiguration()
+        {
+            Property(p => p.FirstName)
+                .IsConcurrencyToken();
+        }
+    }
+~~~   
+   
+#### Wykrywanie kolizji
+
+~~~ csharp
+private static void ConcurencyTest()
+   {
+       using (var context = new MyContext())
+       {
+           var employee = context.Empoyees.Find(1);
+           employee.FirstName = "John";
+
+           bool saveFailed;
+           do
+           {
+               saveFailed = false;
+
+               try
+               {
+                   context.SaveChanges();
+               }
+               catch (DbUpdateConcurrencyException ex)
+               {
+                   saveFailed = true;
+
+                   ex.Entries.Single().Reload();
+               }
+
+           } while (saveFailed);
+       }
+   }
+   
+~~~ 
+
+### RowVersion
+
+####  Konfiguracja za pomocą atrybutu
+
+~~~ csharp
+public class Employee
+{
+    [Timestamp]
+    public byte[] RowVersion { get; set; }
+}
+~~~
+
+####  Konfiguracja za pomocą FluentApi
+   
+~~~ csharp
+public class Employee
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public byte[] RowVersion { get; set; }
+}
+~~~
+
+~~~ csharp
+
+class EmployeeConfiguration : EntityTypeConfiguration<Employee>
+{
+   public EmployeeConfiguration()
+   {
+       Property(p => p.RowVersion)
+          .IsConcurrencyToken()
+          .IsRowVersion();
+   }
+}
+
+~~~
