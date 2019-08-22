@@ -811,3 +811,59 @@ public class MyDbConfiguration : DbConfiguration
 }
 ~~~
 
+
+## Ładowanie powiązanych encji
+
+### Zachłanne ładowanie (Eager Loading)
+
+#### Ładowanie powiązanej właściwości
+
+~~~ csharp
+using (var context = new RentContext())
+{
+    var rentals = context.Vehicle
+        .Include(p => p.Owner)                          
+        .ToList();
+}
+~~~
+
+
+#### Ładowanie zagnieżdżonych encji
+
+~~~ csharp
+using (var context = new RentContext())
+{
+    var rentals = context.Vehicle
+        .Include(p => p.Owner).Select(b => b.Rentee).Include(b => b.Address);                               
+        .ToList();
+}
+~~~
+
+### Leniwe ładowanie (Lazy Loading)
+
+MyContext.cs
+
+~~~ csharp
+public MyContext()
+    : base("MyDbConnection")
+{
+    this.Configuration.LazyLoadingEnabled = true;
+    this.Configuration.ProxyCreationEnabled = true;
+}
+~~~
+
+Właściwości muszą być oznaczone jako **publiczne** i **wirtualne**. W przeciwnym razie Lazy Loading nie będzie działać!
+
+~~~ csharp
+public class Vehicle : Base
+{
+   public int Id { get; set; }
+
+   public virtual Employee Owner { get; set; }
+
+   public virtual ICollection<Employee> Passangers { get; set; }
+}
+~~~
+
+
+
