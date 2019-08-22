@@ -758,4 +758,56 @@ Przykład wypełnienia danych
     }
 ~~~
 
+## Śledzenie zapytań SQL
+
+
+### Logowanie
+
+~~~ csharp
+public MyContext()
+{
+    this.Database.Log += Console.WriteLine;
+}
+~~~
+
+### Formatowanie logów
+
+Utworzenie własnego formattera
+~~~ csharp
+
+public class OneLineFormatter : DatabaseLogFormatter 
+{ 
+    public OneLineFormatter(DbContext context, Action<string> writeAction) 
+        : base(context, writeAction) 
+    { 
+    } 
+ 
+    public override void LogCommand<TResult>( 
+        DbCommand command, DbCommandInterceptionContext<TResult> interceptionContext) 
+    { 
+        Write(string.Format( 
+            "Context '{0}' is executing command '{1}'{2}", 
+            Context.GetType().Name, 
+            command.CommandText.Replace(Environment.NewLine, ""), 
+            Environment.NewLine)); 
+    } 
+ 
+    public override void LogResult<TResult>( 
+        DbCommand command, DbCommandInterceptionContext<TResult> interceptionContext) 
+    { 
+    } 
+}
+~~~
+
+Rejestracja:
+
+~~~ csharp
+public class MyDbConfiguration : DbConfiguration 
+{ 
+    public MyDbConfiguration() 
+    { 
+        SetDatabaseLogFormatter((context, writeAction) => new OneLineFormatter(context, writeAction)); 
+    } 
+}
+~~~
 
