@@ -1089,3 +1089,29 @@ class EmployeeConfiguration : EntityTypeConfiguration<Employee>
         }
     }
 ~~~
+
+## Odłączone encje
+
+### Zapis odłączonej encji z użyciem biblioteki GraphDiff
+
+Instalacja biblioteki
+~~~ bash
+PM> Install-Package RefactorThis.GraphDiff
+~~~
+
+~~~ csharp
+private static void GraphDiffTest()
+{
+    Artist artist = new Artist { ArtistId = 1, FirstName = "The Artist Formerly Known as Prince" };
+
+    using (var context = new MusicStoreContext())
+    {
+        context.UpdateGraph<Artist>(artist, map => map
+               .OwnedCollection(p => p.Albums));
+
+        context.SaveChanges();
+    }
+}
+~~~
+
+http://blog.brentmckendrick.com/introducing-graphdiff-for-entity-framework-code-first-allowing-automated-updates-of-a-graph-of-detached-entities/
