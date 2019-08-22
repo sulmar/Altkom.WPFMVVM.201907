@@ -865,5 +865,27 @@ public class Vehicle : Base
 }
 ~~~
 
+### Jawne ładowanie (Explicit Loading)
 
+#### Ładowanie powiązanej encji
+
+~~~ csharp
+context.Entry(vehicle).Reference(p => p.Owner).Load();
+~~~
+
+### Ładowanie powiązanej kolekcji
+ 
+ ~~~ csharp
+ context.Entry(vehicle).Collection(p => p.Passangers).Load();
+~~~
+
+### Filtrowanie ładowanej kolekcji
+
+~~~ csharp
+context.Entry(vehicle)
+    .Collection(p => p.Passangers)
+    .Query()
+    .Where(p=>p.Gender = Gender.Female)
+    .Load();
+~~~
 
