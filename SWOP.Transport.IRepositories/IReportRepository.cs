@@ -8,5 +8,7 @@ namespace SWOP.Transport.IRepositories
     public interface IReportRepository
     {
         Report Get();
+        VehicleOwnerReport GetVehicleOwnerReport();
+        VehicleByDateReport GetVehicleByDateReport(bool isRemoved);
     }
 }

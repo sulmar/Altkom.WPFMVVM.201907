@@ -9,7 +9,17 @@
       DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=ReportViewModel}"
       Title="ReportView">
 
-    <Grid Background="Blue">
+    <Grid>
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top">
+                <Label Content="{Binding Report.Description}" />
+            </StackPanel>
+
+            <DataGrid
+                IsReadOnly="True"
+                ItemsSource="{Binding Report.Details}" />
+
+        </DockPanel>
         
     </Grid>
 </Page>

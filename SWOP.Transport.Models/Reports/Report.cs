@@ -4,10 +4,15 @@ using System.Text;
 
 namespace SWOP.Transport.Models.Reports
 {
-    public class Report : Base
+    public class Report : ReportBase
     {
-        public string Description { get; set; }
-        public IReadOnlyCollection<ReportDetail> Details { get; set; }
+        public Report(string name, string description, 
+            IReadOnlyCollection<ReportDetail> details)
+            : base(name, description)
+        {
+        }
+
+        public IReadOnlyCollection<ReportDetail> Details { get; }
     }
 
     public class ReportDetail : Base

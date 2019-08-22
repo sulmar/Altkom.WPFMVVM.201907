@@ -6,6 +6,7 @@ using System.Text;
 
 namespace SWOP.Transport.ViewModels
 {
+
     public class ReportViewModel : ViewModelBase
     {
         private readonly IReportRepository reportRepository;

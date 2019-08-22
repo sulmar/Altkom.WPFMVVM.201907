@@ -71,6 +71,8 @@ namespace SWOP.Transport.WPFClient
         public EmployeesViewModel EmployeesViewModel => container.Resolve<EmployeesViewModel>();
         public VehicleViewModel VehicleViewModel => container.Resolve<VehicleViewModel>();
         public ReportViewModel ReportViewModel => container.Resolve<ReportViewModel>();
+        public VehicleOwnerReportViewModel VehicleOwnerReportViewModel => container.Resolve<VehicleOwnerReportViewModel>();
+        public VehicleByDateReportViewModel VehicleByDateReportViewModel => container.Resolve<VehicleByDateReportViewModel>();
 
     }
 }

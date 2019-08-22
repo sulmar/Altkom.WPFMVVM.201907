@@ -38,10 +38,10 @@ namespace SWOP.Transport.WPFClient
         {
             Employee employee = employeeRepository.Authorize(username, password);
 
-            var roles = roleRepository.GetByEmployee(employee);
-
              if (employee != null)
             {
+                var roles = roleRepository.GetByEmployee(employee);
+
                 IList<Claim> employeeClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, employee.FullName),

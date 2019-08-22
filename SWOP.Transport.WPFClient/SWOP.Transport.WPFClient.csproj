@@ -112,6 +112,12 @@
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\VehicleByDateReportView.xaml.cs">
+      <DependentUpon>VehicleByDateReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VehicleOwnerReportView.xaml.cs">
+      <DependentUpon>VehicleOwnerReportView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\VehiclesView.xaml.cs">
       <DependentUpon>VehiclesView.xaml</DependentUpon>
     </Compile>
@@ -160,6 +166,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VehicleByDateReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VehicleOwnerReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

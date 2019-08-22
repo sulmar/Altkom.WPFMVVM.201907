@@ -16,9 +16,15 @@ namespace SWOP.Transport.DbRepositories
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Role> Roles { get; set; }
 
+        public TransportContext()
+            : base("TransportConnection")
+        {
+            this.Database.Log = Console.WriteLine;
+        }
+
 
         public TransportContext(IDatabaseInitializer<TransportContext> initializer)
-               : base("TransportConnection")
+               : this()
         {
             Database.SetInitializer(initializer);
 
