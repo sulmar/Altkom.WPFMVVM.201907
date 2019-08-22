@@ -16,6 +16,16 @@
 PM> Install-Package EntityFramework
 ~~~
 
+## Algorytm wyszukiwania bazy danych
+
+1. Jeśli w konstruktorze DbContext podano nazwę połączenia to szuka jej w pliku konfiguracynym app.config w sekcji _connectionStrings_ 
+
+2. Jeśli użyto domyślnego konstruktora DbContext to szuka pliku konfiguracynym app.config nazwy klasy DbContext w sekcji _connectionStrings_  
+
+3. Szuka instancji SQL Express 
+
+4. Szuka bazy danych LocalDb o adresie (localdb)\mssqllocaldb
+
 ## Utworzenie kontekstu
 
 ~~~ csharp
@@ -46,7 +56,7 @@ https://docs.microsoft.com/en-us/sql/azure-data-studio/download?view=sql-server-
 - ``` Update-Database -SourceMigration: {migrationA} -TargetMigration: {migrationB}  ```  - aktualizacja bazy danych pomiędzy migracjami
 
 
-# DbContext
+## DbContext
 Klasa DbContext jest główną częścią Entity Framework. Instacja DbContext reprezentuje sesję z bazą danych.
 
 
