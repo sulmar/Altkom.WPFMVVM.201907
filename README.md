@@ -610,6 +610,64 @@ class EmployeeConfiguration : EntityTypeConfiguration<Employee>
 
 ~~~
 
+## Migracje
+
+
+### Utworzenie triggera
+1. Utwórz folder np. Scripts i plik OnDeleteOrderDetail.sql
+
+~~~ sql
+CREATE TRIGGER OnDeleteOrderDetail
+    ON [dbo].[OrderDetails]
+    FOR DELETE
+AS
+UPDATE [dbo].[Orders] SET ModifiedAt = getdate() WHERE Id = deleted.OrderId
+~~~
+
+2. Ustaw Build Action na Embedded Resource
+
+
+3. Utwórz klasę migracji
+
+~~~ csharp
+public partial class AddTriggerOnDeleteOrderDetails : DbMigration
+    {
+        public override void Up()
+        {
+            SqlResource("MyApp.Scripts.201609301218380_AddTriggerOnDeleteOrderDetail_Up.sql", suppressTransaction: true);
+        }
+        
+        public override void Down()
+        {
+            Sql("IF OBJECT_ID ('[OnDeleteOrderDetail]', 'TR') IS NOT NULL DROP TRIGGER OnDeleteOrderDetail");
+        }
+    }
+
+~~~
+
+### Utworzenie procedury składowanej
+
+~~~ chsarp
+
+public override void Up() 
+{
+  CreateStoredProcedure(
+    "MyStoredProcedure",
+    p => new
+    {
+        id = p.Int()
+    },
+    @"SELECT some-data FROM my-table WHERE id = @id"
+  );
+}
+
+public override void Down() 
+{
+  DropStoredProcedure("MyStoredProcedure");
+}
+
+~~~
+
 
 ## Inicjalizatory
 
