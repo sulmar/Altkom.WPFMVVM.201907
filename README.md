@@ -128,9 +128,9 @@ Jeśli korzystamy z migracji, a konsuktor naszej klasy DbContext posiada paramet
 ~~~
 
 
-# Konwencja relacji Jeden-do-wielu
+## Konwencja relacji Jeden-do-wielu
 
-## Konwencja 1
+### Konwencja 1
 Encja zawiera navigation property.
 
 ``` csharp
@@ -152,7 +152,7 @@ public class Customer
 ```
 Zamówienie zawiera referencje do navigation property typu klient. EF utworzy shadow property CustomerId w modelu koncepcyjnym, które będzie mapowane do kolumny CustomerId w tabeli Orders.
 
-## Konwencja 2
+### Konwencja 2
 Encja zawiera kolekcję.
 
 ``` csharp
@@ -175,7 +175,7 @@ public class Customer
 
 W bazie danych będzie taki sam rezultat jak w przypadku konwencji 1.
 
-## Konwencja 3
+### Konwencja 3
 
 Relacja zawiera navigation property po obu stronach. W rezultacie otrzymujemy połączenie konwencji 1 i 2.
 
@@ -200,7 +200,7 @@ public class Customer
 
 ```
 
-## Konwencja 4
+### Konwencja 4
 Konwencja z uzyciem wlasciwosci foreign key
 
 
@@ -226,7 +226,7 @@ public class Customer
 ```
 
 
-# Konwencja relacji Jeden-do-jeden
+## Konwencja relacji Jeden-do-jeden
 
 ``` csharp
 public class Order
@@ -247,7 +247,7 @@ public class Payment
 }
 ```
 
-# Konwencja relacji wiele-do-wielu
+## Konwencja relacji wiele-do-wielu
 
 
 ``` csharp
@@ -270,7 +270,7 @@ public class Role
 
 Zostanie automatycznie utworzona tabela pośrednia
 
-# Konfiguracja relacji Jeden-do-wielu z uzyciem Fluent API
+## Konfiguracja relacji Jeden-do-wielu z uzyciem Fluent API
 
 
 ``` csharp
@@ -375,9 +375,9 @@ modelBuilder.Entity<User>()
 ```
 
 
-# Śledzenie (Tracking)
+## Śledzenie (Tracking)
 
-## AutoDetectChanges
+### AutoDetectChanges
 
 Domyślnie śledzenie zmian jest włączone. W celu zwiększenia wydajności, zwłaszcza przy dodawaniu dużej ilości encji warto wyłączyć automatyczne wykrywanie zmian:
 
@@ -418,7 +418,7 @@ using (var context = new MyContext())
         }
 ~~~
 
-## Lokalne wyłączenie śledzenia
+### Lokalne wyłączenie śledzenia
 
 ~~~ csharp
 using (var context = new MyContext())
@@ -431,7 +431,7 @@ using (var context = new MyContext())
 
 
 
-## Pobranie informacji o encjach
+### Pobranie informacji o encjach
 
 ~~~ csharp
  Console.WriteLine(
@@ -447,10 +447,10 @@ foreach (var entry in context.ChangeTracker.Entries())
 
 
 
-# Praca z odłączonymi encjami
+## Praca z odłączonymi encjami
 
 
-## Attach()
+### Attach()
 Metoda *Attach()* przyłącza odłączony graf encji i zaczyna go śledzić.
 
 Metoda *Attach()* ustawia główną encję na stan Added niezależnie od tego, czy posiada wartość klucza. Jeśli encje dzieci posiadają wartość klucza wówczas zaznaczane są jako *Unchanged*, a w przeciwnym razie jako *Added*.
@@ -468,7 +468,7 @@ context.Attach(entityGraph).State = state;
 
 
 
-## Entry
+### Entry
 
 ``` csharp
 context.Entry(order).State = EntityState.Modified
@@ -476,7 +476,7 @@ context.Entry(order).State = EntityState.Modified
 
 Wyrażenie przyłącza encję do kontekstu i ustawia stan na **Modified**. Ignoruje wszystkie pozostałe encje.
 
-## Add()
+### Add()
 Metody *DbContext.Add()* i *DbSet.Add()* przyłączają graf encji do kontekstu i ustawiają stan encji na **Added** niezależnie od tego czy posiadają wartość klucza czy też nie.
 
 | Method | Root entity with/out Key value  | 	Root entity with/out Key |
@@ -484,7 +484,7 @@ Metody *DbContext.Add()* i *DbSet.Add()* przyłączają graf encji do kontekstu 
 | DbContext.Add  | Added  | Added  | 
 
 
-## Update()
+### Update()
 
 Metoda *Update()* przyłącza graf encji do kontekstu i ustawia stan poszczególnych encji zależnie od tego czy jest ustawiona wartość klucza.
 
@@ -494,7 +494,7 @@ Metoda *Update()* przyłącza graf encji do kontekstu i ustawia stan poszczegól
 
 
 
-## Delete()
+### Delete()
 
 Metoda *Delete()* ustawia stan głównej encji na **Deleted**.
 
@@ -506,7 +506,7 @@ Metoda *Delete()* ustawia stan głównej encji na **Deleted**.
 
 
 
-# Change Tracker
+## Change Tracker
 
 Odczytanie stanu encji
 
@@ -521,9 +521,9 @@ foreach (var property in context.Entry(customer).Properties)
 ~~~
 
 
-# SQL
+## Surowy SQL
 
-Uruchomienie zapytania SQL i pobranie wyników
+### Uruchomienie zapytania SQL i pobranie wyników
 
 ~~~ csharp
 public IEnumerable<Customer> Get(string lastname)
@@ -533,7 +533,7 @@ public IEnumerable<Customer> Get(string lastname)
 }
 ~~~
 
-- Uruchomienie procedury składowanej
+### Uruchomienie procedury składowanej
 ~~~ csharp
 using (var context = new SampleContext())
 {
@@ -543,7 +543,8 @@ using (var context = new SampleContext())
 }
 ~~~
 
-- Uruchomienie sparametryzowanej procedury składowanej
+### Uruchomienie procedury składowanej z parametrami
+
 ~~~ csharp
 using (var context = new SampleContext())
 {
@@ -555,9 +556,7 @@ using (var context = new SampleContext())
 ~~~
 
 
-## FromSql
-Jeśli nie posiadasz uprawnień do tworzenia widoków i tabel, ale chciałbyś skorzystac z typowanych klas, mozna uzyc metody **FromSql()**
-
+### Typy anonimowe i pobieranie wartości
 ~~~ csharp
 var orderHeaders = db.Database.SqlQuery(
                     @"select c.Name as CustomerName, o.DateCreated, sum(oi.Price) as TotalPrice, 
@@ -571,7 +570,7 @@ var orderHeaders = db.Database.SqlQuery(
 
 
 
-# Indeksy
+## Indeksy
 
 ~~~ csharp
 
@@ -588,6 +587,8 @@ class EmployeeConfiguration : EntityTypeConfiguration<Employee>
 
 ~~~
 
+
+## Inicjalizatory
 
 
 
