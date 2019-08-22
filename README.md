@@ -590,5 +590,89 @@ class EmployeeConfiguration : EntityTypeConfiguration<Employee>
 
 ## Inicjalizatory
 
+### Wbudowane inicjalizatory
+
+CreateDatabaseIfNotExists - utwórz bazę danych jeśli nie istnieje
+DropCreateDatabaseAlways - zawsze usuń i utwórz bazę danych
+DropCreateDatabaseIfModelChanges - usuń i utwórz bazę danych jeśli nastąpiły zmiany w modelu
+
+
+### Ustawienie inicjalizatora w kodzie
+
+~~~ csharp
+ public class MyContext : DbContext
+ {
+     public MyContext() : base("MyDbConnection")
+     {
+         Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MyContext>());
+     } 
+ }
+~~~
+
+### Ustawienie inicjalizatora w pliku konfiguracyjnym
+
+~~~ xml
+<entityFramework>
+        <contexts>
+           <context type="MyApp.MyContext, MyContext">
+           <databaseInitializer type="System.Data.Entity.DropCreateDatabaseAlways`1[[MyApp.MyContext, MyApp]], EntityFramework" />
+           </context>
+        </contexts>
+    </entityFramework>
+    
+~~~
+
+### Własny inicjalizator
+
+~~~ csharp
+public class MyDbInitializer : IDatabaseInitializer<MyContext>
+    {
+        public void MyDbInitializer(MyContext context)
+        {
+            if (!context.Database.Exists() || !context.Database.CompatibleWithModel(true))
+            {
+                context.Database.Delete();
+                context.Database.Create();
+            }
+            // context.Database.ExecuteSqlCommand("Custom SQL Command here");
+        }
+    }
+~~~
+
+
+
+### Wyłączenie inicjalizatorów
+
+~~~ csharp
+public MyContext() : base("MyDbConnection")
+{
+    Database.SetInitializer<MyContext>(null);
+ }
+ ~~~
+    
+### Rozszerzenie wbudowanego inicjalizatora
+
+Przykład wypełnienia danych
+
+~~~ csharp
+ public class MyDbInitializer : CreateDatabaseIfNotExists<MyContext>
+    {
+        private readonly CustomerFaker customerFaker;
+        
+        public MyDbInitializer(CustomerFaker customerFaker)
+        {
+            this.customerFaker = customerFaker;  
+        }
+
+        protected override void Seed(TransportContext context)
+        {
+            context.Customers.AddRange(customerFaker.Generate(1000));
+         
+
+            base.Seed(context);
+        }
+
+    }
+~~~
 
 
