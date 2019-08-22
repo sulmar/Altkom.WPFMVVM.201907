@@ -889,3 +889,69 @@ context.Entry(vehicle)
     .Load();
 ~~~
 
+## Transakcje
+
+### Transakcje bazy danych
+
+~~~ csharp
+
+private void Save(Order order)
+{
+    using (var context = new MyContext())
+    using (var transaction = context.Database.BeginTransaction())
+    {
+        try
+        {
+            context.Orders.Add(order);
+            context.SaveChanges();
+            
+            context.Customers.Add(order.Customer);
+            context.SaveChanges();
+            
+            transaction.Commit();
+        }
+        catch(Exception)
+        {
+            transaction.Rollback();
+        }
+    }
+}
+
+~~~
+
+### Rozproszone transakcje
+
+Dodaj referencję do _System.Transactions_
+
+
+~~~ csharp 
+
+private static void Save(Order oder)
+{
+    using (var scope = new TransactionScope())
+    {
+        using (var context1 = new OrdersContext())
+        {
+            context1.Orders.Add(order);      
+            context1.SaveChanges();
+        }
+ 
+        using (var context2 = new CustomersContext())
+        {
+            context2.Customers.Add(order.Customer);
+            context2.SaveChanges();
+        }
+ 
+        scope.Complete();
+    }
+}
+
+
+uwaga: w przypadku wykorzystania transakcji w metodzie asynchronicznej otrzymamy błąd. 
+Dlatego należy dodać parametr w konstruktorze:
+
+~~~ csharp
+var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled)
+~~~
+
+        
