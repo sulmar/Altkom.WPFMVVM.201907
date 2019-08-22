@@ -1055,3 +1055,37 @@ class EmployeeConfiguration : EntityTypeConfiguration<Employee>
 }
 
 ~~~
+
+## Mapowanie operacji CRUD na procedury składowane
+
+### Konfiguracja FluentApi
+~~~ csharp
+class EmployeeConfiguration : EntityTypeConfiguration<Employee>
+    {
+        public EmployeeConfiguration()
+        {
+            MapToStoredProcedures();
+        }
+    }
+~~~
+
+Utworzone zostaną procedury składowane.
+
+### Modyfikacja nazw
+
+Modyfikacja nazw procedur składowanych
+
+~~~ csharp
+class EmployeeConfiguration : EntityTypeConfiguration<Employee>
+    {
+        public EmployeeConfiguration()
+        {
+            MapToStoredProcedures(s =>
+             {
+                 s.Update(u => u.HasName("modify_employee"));
+                 s.Delete(d => d.HasName("delete_employee"));
+                 s.Insert(i => i.HasName("insert_employee"));
+             });
+        }
+    }
+~~~
