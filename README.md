@@ -1,13 +1,599 @@
-# Altkom.WPFMVVM.201907
-Przykłady ze szkolenia WPF MVVM
+# WPF MVVM
 
-
-## Warstwy
-
+## Projekty
 1. Models
 2. IRepositories
 3. FakeRepositories / DbRepositories
 4. ViewModels
 5. Views
+
+
+# Entity Framework 6.2
+
+## Instalacja biblioteki
+
+~~~ bash
+PM> Install-Package EntityFramework
+~~~
+
+## Utworzenie kontekstu
+
+~~~ csharp
+public class MyContext : DbContext
+{
+    public MyContext()
+      :base("MyDbConnection")
+    { }
+
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Order> Orders { get; set; }
+}
+~~~
+
+- Azure Data Studio
+
+https://docs.microsoft.com/en-us/sql/azure-data-studio/download?view=sql-server-2017
+
+
+
+## Przydatne polecenia PMC
+- ``` Enable-Migrations ``` - włączenie migracji
+- ``` Add-Migration {migration} ``` - utworzenie migracji
+- ``` Update-Database ``` - aktualizacja bazy danych do najnowszej wersji
+- ``` Update-Database -script ``` - wygenerowanie skryptu do aktualizacji bazy danych do najnowszej wersji
+- ``` Update-Database -verbose ``` - aktualizacja bazy danych do najnowszej wersji + wyświetlanie logu
+- ``` Update-Database -TargetMigration: {migration} ``` - aktualizacja bazy danych do wskazanej migracji
+- ``` Update-Database -SourceMigration: {migrationA} -TargetMigration: {migrationB}  ```  - aktualizacja bazy danych pomiędzy migracjami
+
+
+# DbContext
+Klasa DbContext jest główną częścią Entity Framework. Instacja DbContext reprezentuje sesję z bazą danych.
+
+
+Models.cs
+
+~~~ csharp
+
+public class Order
+{
+    public int OrderId { get; set; }   
+    public string OrderNumber { get; set; }  
+    public DateTime OrderDate { get; set; }
+    public DateTime DeliveryDate? { get; set; }
+    public Customer Customer { get; set; }
+}
+
+public class Customer
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public bool IsDeleted { get; set; }
+}
+
+~~~
+
+
+MyContext.cs
+
+~~~ csharp
+public class MyContext : DbContext
+{
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Order> Orders { get; set; }
+
+    public CustomersContext() 
+        : base("MyDbConnection")
+    {
+    }
+}
+~~~
+
+~~~ csharp
+
+using (var context = new MyContext(optionsBuilder.Options))
+{
+  // do stuff
+}
+~~~
+
+DbContext umożliwia następujące zadania:
+ 1. Zarządzanie połączeniem z bazą danych
+ 2. Konfiguracja modelu i relacji
+ 3. Odpytywanie bazy danych
+ 4. Zapisywanie danych do bazy danych
+ 5. Śledzenie zmian
+ 6. Cache'owanie
+ 7. Zarządzanie transakcjami
+
+## Właściwości DbContext
+| Metoda | Użycie |
+|---|---|
+| ChangeTracker | Dostarcza informacje i operacje do śledzenie obiektów  |
+| Database | Dostarcza informacje o bazie danych i umożliwia operacje na bazie danych |
+
+## Fabryka
+Jeśli korzystamy z migracji, a konsuktor naszej klasy DbContext posiada parametr(y) nalezy utworzyć fabrykę:
+
+~~~ csharp
+    
+    public class MyContextFactory : IDbContextFactory<TransportContext>
+    {
+        public MyContext Create()
+        {
+            return new MyContext(new TransportDbInitializer());
+        }
+    }
+    
+~~~
+
+
+# Konwencja relacji Jeden-do-wielu
+
+## Konwencja 1
+Encja zawiera navigation property.
+
+``` csharp
+public class Order
+{
+    public int OrderId { get; set; }   
+    public string OrderNumber { get; set; }  
+
+    public Customer Customer { get; set; } // Navigation property
+}
+
+public class Customer
+{
+    public int CustomerId { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+}
+
+```
+Zamówienie zawiera referencje do navigation property typu klient. EF utworzy shadow property CustomerId w modelu koncepcyjnym, które będzie mapowane do kolumny CustomerId w tabeli Orders.
+
+## Konwencja 2
+Encja zawiera kolekcję.
+
+``` csharp
+public class Order
+{
+    public int OrderId { get; set; }       
+    public string OrderNumber { get; set; } 
+}
+
+public class Customer
+{
+    public int CustomerId { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+
+    public List<Order> Orders { get; set; }
+}
+
+```
+
+W bazie danych będzie taki sam rezultat jak w przypadku konwencji 1.
+
+## Konwencja 3
+
+Relacja zawiera navigation property po obu stronach. W rezultacie otrzymujemy połączenie konwencji 1 i 2.
+
+
+``` csharp
+public class Order
+{
+    public int OrderId { get; set; }       
+    public string OrderNumber { get; set; } 
+
+    public Customer Customer { get; set; } // Navigation property
+}
+
+public class Customer
+{
+    public int CustomerId { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+
+    public List<Order> Orders { get; set; }
+}
+
+```
+
+## Konwencja 4
+Konwencja z uzyciem wlasciwosci foreign key
+
+
+``` csharp
+public class Order
+{
+    public int OrderId { get; set; }       
+    public string OrderNumber { get; set; } 
+
+    public int CustomerId { get; set; }  // Foreign key property
+    public Customer Customer { get; set; } // Navigation property
+}
+
+public class Customer
+{
+    public int CustomerId { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+
+    public List<Order> Orders { get; set; }
+}
+
+```
+
+
+# Konwencja relacji Jeden-do-jeden
+
+``` csharp
+public class Order
+{
+    public int OrderId { get; set; }       
+    public string OrderNumber { get; set; } 
+
+    public Payment Payment { get; set; } // Navigation property
+}
+
+public class Payment
+{
+    public int PaymentId { get; set; }
+    public decimal Amount { get; set; }
+
+    public int OrderId { get; set; }
+    public Order Order { get; set; }
+}
+```
+
+# Konwencja relacji wiele-do-wielu
+
+
+``` csharp
+public class User
+{
+    public int Id { get; set; }       
+    public string Login { get; set; } 
+
+    public ICollection<Role> Roles { get; set; } // Navigation property
+}
+
+public class Role
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public ICollection<User> Users { get; set; }  // Navigation property
+}
+```
+
+Zostanie automatycznie utworzona tabela pośrednia
+
+# Konfiguracja relacji Jeden-do-wielu z uzyciem Fluent API
+
+
+``` csharp
+   protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Order>()
+                .HasOne<Customer>()
+                .WithMany(c=>c.Orders)
+                .HasForeignKey(p=>p.CustomerId);
+``` 
+
+
+Alternatywnie mozna wyjsc od drugiej strony
+``` csharp
+            modelBuilder.Entity<Customer>()
+                .HasMany(c=>c.Orders)
+                .WithOne(o=>o.Customer)
+                .HasForeignKey(o=>o.CustomerId);
+
+
+        }
+```
+
+## Konfiguracja kaskadowego usuwania z Fluent API
+
+``` csharp
+modelBuilder.Entity<Customer>()
+                .HasMany(c=>c.Orders)
+                .WithOne(o=>o.Customer)
+                .HasForeignKey(o=>o.CustomerId)
+                .OnDelete(DeleteBehavior.Cascade);
+```
+
+Rodzaje:
+- Cascade - usuwa wszystkie encje wraz z encją nadrzędną
+- ClientSetNull - klucze obce w encjach zaleznych będą ustawione na null
+- Restrict - blokuje kaskadowe usuwanie
+- SetNull - klucze obce w encjach zaleznych będą ustawione na null
+
+
+## Konfiguracja jeden-do-jeden z Fluent API
+
+
+``` csharp
+ modelBuilder.Entity<Order>()
+                .HasOne<Payment>()
+                .WithOne(p=>p.Order)
+                .HasForeignKey<Payment>(p=>p.PaymentId);
+```
+
+## Konfiguracja wiele-do-wiele z Fluent API
+
+### Podstawowa konfiguracja
+
+``` csharp
+
+modelBuilder.Entity<User>()
+                .HasMany(e => e.Roles)
+                .WithMany(e => e.Users);
+```
+
+Powstanie tabela pośrednicząca o nazwie UserRoles
+
+
+Jeśli zamienimy miejscami pola otrzymamy inną nazwę tabeli:
+
+``` csharp
+
+modelBuilder.Entity<Role>()
+                .HasMany(e => e.Users)
+                .WithMany(e => e.Roles);
+```
+Powstanie tabela pośrednicząca o nazwie RoleUsers
+
+### Własna nazwy tabeli
+
+``` csharp
+modelBuilder.Entity<User>()
+                .HasMany(e => e.Roles)
+                .WithMany(e => e.Users)
+                .Map(m=>
+                {
+                    m.ToTable("UsersInRoles");
+                });
+```
+
+Powstanie tabela pośrednicząca o nazwie UsersInRoles
+
+### Własne klucze obce
+
+
+``` csharp
+modelBuilder.Entity<User>()
+                .HasMany(e => e.Roles)
+                .WithMany(e => e.Users)
+                .Map(m=>
+                {
+                    m.MapLeftKey("UserId");
+                    m.MapRightKey("RoleId");
+                });
+
+```
+
+
+# Śledzenie (Tracking)
+
+## AutoDetectChanges
+
+Domyślnie śledzenie zmian jest włączone. W celu zwiększenia wydajności, zwłaszcza przy dodawaniu dużej ilości encji warto wyłączyć automatyczne wykrywanie zmian:
+
+
+~~~ csharp
+using (var context = new MyContext())
+{
+    context.Configuration.AutoDetectChangesEnabled = false;
+}
+~~~
+
+Pamiętaj o wywołaniu metody _DetectChanges()_ przed _SaveChanges()_
+
+Przykład:
+~~~ csharp
+using (var context = new MyContext())
+{
+
+            using (var context = new MyContext())
+            {
+                try
+                {
+                    context.Configuration.AutoDetectChangesEnabled = false;
+ 
+                    foreach (var product in context.Products)
+                    {
+                        product.UnitPrice = 1.0m;
+                    }
+                }
+                finally
+                {
+                    context.Configuration.AutoDetectChangesEnabled = true;
+                }
+ 
+                context.ChangeTracker.DetectChanges();
+                context.SaveChanged();
+            }
+        }
+~~~
+
+## Lokalne wyłączenie śledzenia
+
+~~~ csharp
+using (var context = new MyContext())
+{
+    var blogs = context.Customers
+        .AsNoTracking()
+        .ToList();
+}
+~~~
+
+
+
+## Pobranie informacji o encjach
+
+~~~ csharp
+ Console.WriteLine(
+   $"Tracked Entities: {context.ChangeTracker.Entries().Count()}");
+
+foreach (var entry in context.ChangeTracker.Entries())
+{
+    Console.WriteLine($"Entity: {entry.Entity.GetType().Name}, 
+                        State: {entry.State.ToString()} ");
+}
+
+~~~
+
+
+
+# Praca z odłączonymi encjami
+
+
+## Attach()
+Metoda *Attach()* przyłącza odłączony graf encji i zaczyna go śledzić.
+
+Metoda *Attach()* ustawia główną encję na stan Added niezależnie od tego, czy posiada wartość klucza. Jeśli encje dzieci posiadają wartość klucza wówczas zaznaczane są jako *Unchanged*, a w przeciwnym razie jako *Added*.
+
+
+``` csharp
+context.Attach(entityGraph).State = state;
+```
+
+| Attach()  | Root entity with Key value  | Root Entity with Empty or CLR default value  | Child Entity with Key value  |  Child Entity with empty or CLR default value |
+|---|---|---|---|---|
+| EntityState.Added  | Added  | Added  | Unchanged  | Added  |
+| EntityState.Modified  | Modified  | Exception  | Unchanged  | Added  |
+| EntityState.Deleted  | Deleted  | Exception  | Unchanged  | Added  |
+
+
+
+## Entry
+
+``` csharp
+context.Entry(order).State = EntityState.Modified
+```
+
+Wyrażenie przyłącza encję do kontekstu i ustawia stan na **Modified**. Ignoruje wszystkie pozostałe encje.
+
+## Add()
+Metody *DbContext.Add()* i *DbSet.Add()* przyłączają graf encji do kontekstu i ustawiają stan encji na **Added** niezależnie od tego czy posiadają wartość klucza czy też nie.
+
+| Method | Root entity with/out Key value  | 	Root entity with/out Key |
+|---|---|---|
+| DbContext.Add  | Added  | Added  | 
+
+
+## Update()
+
+Metoda *Update()* przyłącza graf encji do kontekstu i ustawia stan poszczególnych encji zależnie od tego czy jest ustawiona wartość klucza.
+
+| Update()  | Root entity with Key value  | Root Entity with Empty or CLR default value  | Child Entity with Key value  |  Child Entity with empty or CLR default value |
+|---|---|---|---|---|
+| DbContext.Update  | Modified  | Added  | Modified  | Added  |
+
+
+
+## Delete()
+
+Metoda *Delete()* ustawia stan głównej encji na **Deleted**.
+
+| Delete()  | Root entity with Key value  | Root Entity with Empty or CLR default value  | Child Entity with Key value  |  Child Entity with empty or CLR default value |
+|---|---|---|---|---|
+| DbContext.Delete  | Deleted  | Exception  | Unchanged  | Added  |
+
+
+
+
+
+# Change Tracker
+
+Odczytanie stanu encji
+
+~~~ csharp
+
+Trace.WriteLine(context.Entry(customer).State);
+foreach (var property in context.Entry(customer).Properties)
+{
+    Trace.WriteLine($"{property.Metadata.Name} {property.IsModified} {property.OriginalValue} -> {property.CurrentValue}");
+}
+
+~~~
+
+
+# SQL
+
+Uruchomienie zapytania SQL i pobranie wyników
+
+~~~ csharp
+public IEnumerable<Customer> Get(string lastname)
+{
+    string sql = $"select * from dbo.customers where LastName = '{lastname}'";
+    return context.Database.SqlQuery<Customer>(sql);
+}
+~~~
+
+- Uruchomienie procedury składowanej
+~~~ csharp
+using (var context = new SampleContext())
+{
+    var books = context.Database
+        .SqlQuery("GetAllCustomers")
+        .ToList();
+}
+~~~
+
+- Uruchomienie sparametryzowanej procedury składowanej
+~~~ csharp
+using (var context = new SampleContext())
+{
+    var city = new SqlParameter("@City", "Warsaw");
+    var customers = context
+        .SqlQuery("GetCustomersByCity @City" , city)
+        .ToList();
+}
+~~~
+
+
+## FromSql
+Jeśli nie posiadasz uprawnień do tworzenia widoków i tabel, ale chciałbyś skorzystac z typowanych klas, mozna uzyc metody **FromSql()**
+
+~~~ csharp
+var orderHeaders = db.Database.SqlQuery(
+                    @"select c.Name as CustomerName, o.DateCreated, sum(oi.Price) as TotalPrice, 
+                    count(oi.Price) as TotalItems
+                    from  OrderItems  oi 
+                    inner join Orders o on oi.OrderId = o.OrderId
+                    inner join Customers c on o.CustomerId = c.CustomerId
+                    group by oi.OrderId, c.Name, o.DateCreated");
+~~~
+
+
+
+
+# Indeksy
+
+~~~ csharp
+x.Entity<Token>()
+    .HasIndex(d => new { d.ServiceKey, d.ExternalId })
+    .HasName("IX_ServiceKey_ExternalId")
+    .HasFilter(null)
+    .IsUnique(true);
+~~~
+
+
+# Domyślne wartości
+
+~~~ csharp
+
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Employee>()
+        .Property(b => b.CreatedDate)
+        .HasDefaultValueSql("CONVERT(date, GETDATE())");
+}
+
+~~~
+
 
 
