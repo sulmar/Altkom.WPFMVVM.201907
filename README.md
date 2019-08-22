@@ -592,9 +592,11 @@ class EmployeeConfiguration : EntityTypeConfiguration<Employee>
 
 ### Wbudowane inicjalizatory
 
-CreateDatabaseIfNotExists - utwórz bazę danych jeśli nie istnieje
-DropCreateDatabaseAlways - zawsze usuń i utwórz bazę danych
-DropCreateDatabaseIfModelChanges - usuń i utwórz bazę danych jeśli nastąpiły zmiany w modelu
+| Typ | Opis |
+|---|---|
+| CreateDatabaseIfNotExists | utwórz bazę danych jeśli nie istnieje |
+| DropCreateDatabaseAlways | zawsze usuń i utwórz bazę danych |
+| DropCreateDatabaseIfModelChanges | usuń i utwórz bazę danych jeśli nastąpiły zmiany w modelu |
 
 
 ### Ustawienie inicjalizatora w kodzie
