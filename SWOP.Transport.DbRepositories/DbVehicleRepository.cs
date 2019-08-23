@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace SWOP.Transport.DbRepositories
 {
@@ -106,6 +107,42 @@ namespace SWOP.Transport.DbRepositories
 
         public void Add(Vehicle vehicle, Employee employee)
         {
+             NativeTransaction(vehicle, employee);
+
+           // DistributedTransaction(vehicle, employee);
+
+        }
+
+        private void DistributedTransaction(Vehicle vehicle, Employee employee)
+        {
+            // add reference: System.Transactions
+            // using System.Transactions
+
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    var employeeContext = new TransportContext();
+                    employeeContext.Employees.Add(employee);
+                    employeeContext.SaveChanges();
+
+                    var vehicleContext = new TransportContext();
+                    vehicleContext.Vehicles.Add(vehicle);
+                    vehicleContext.SaveChanges();
+                    
+                    scope.Complete();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+                
+        }
+
+        private void NativeTransaction(Vehicle vehicle, Employee employee)
+        {
             using (DbContextTransaction transaction = context.Database.BeginTransaction())
             {
                 try
@@ -123,11 +160,6 @@ namespace SWOP.Transport.DbRepositories
                     transaction.Rollback();
                 }
             } //  -> wywoluje transaction.Dispose();
-
-
-
-
-
         }
     }
 }
