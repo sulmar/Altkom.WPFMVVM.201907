@@ -69,6 +69,31 @@
 
                 </Grid>
 
+                <!-- Employee -->
+                <Grid Margin="0,10,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0">First Name</Label>
+                    <Label Grid.Column="0" Grid.Row="1">Last Name</Label>
+                    <Label Grid.Column="0" Grid.Row="2">Email</Label>
+
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Employee.FirstName}" />
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Employee.LastName}" />
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Employee.Email}" />
+                    
+                    
+                </Grid>
+                    
+
                 <DataGrid 
                     ItemsSource="{Binding Vehicle.Deadlines}"
                     AutoGenerateColumns="False" >

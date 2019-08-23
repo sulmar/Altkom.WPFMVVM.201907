@@ -23,6 +23,13 @@ namespace SWOP.Transport.DbRepositories
             Console.WriteLine(context.Entry(entity).State);
             entities.Add(entity);
 
+            var entries = context.ChangeTracker.Entries();
+
+            foreach (var entry in entries)
+            {
+                Console.WriteLine($"{entry.Entity} {entry.State}");
+            }
+
             Console.WriteLine(context.Entry(entity).State);
             context.SaveChanges();
 

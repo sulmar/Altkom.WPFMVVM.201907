@@ -18,6 +18,7 @@ namespace SWOP.Transport.ViewModels
         public IEnumerable<VehicleType> VehicleTypes => Enum.GetValues(typeof(VehicleType)).Cast<VehicleType>();
 
         public IEnumerable<Employee> Employees { get; set; }
+        public Employee Employee { get; set; }
 
         public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
@@ -44,6 +45,9 @@ namespace SWOP.Transport.ViewModels
             if (navigationService.Parameter==null)
             {
                 Vehicle = new Vehicle();
+                Employee = new Policeman();
+
+             //   Vehicle.Owner = Employee;
             }
             else
             {
@@ -65,7 +69,9 @@ namespace SWOP.Transport.ViewModels
         {
             if (IsNew)
             {
-                vehicleRepository.Add(Vehicle);
+                // vehicleRepository.Add(Vehicle);
+
+                vehicleRepository.Add(Vehicle, Employee);
             }
             else
             {

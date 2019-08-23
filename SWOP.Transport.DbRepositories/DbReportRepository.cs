@@ -41,7 +41,7 @@ namespace SWOP.Transport.DbRepositories
 
             var details = context.Database.SqlQuery<VehicleByDateReportDetail>(sql, isRemovedParameter).ToList();
 
-            var details2 = context.Database.SqlQuery<VehicleByDateReportDetail>("uspGetVehicleByDateReport", isRemovedParameter).ToList();
+            // var details2 = context.Database.SqlQuery<VehicleByDateReportDetail>("uspGetVehicleByDateReport", isRemovedParameter).ToList();
 
             return new VehicleByDateReport("Raport pojazdów", "Lorem ipsum", details);
 

@@ -104,5 +104,30 @@ namespace SWOP.Transport.DbRepositories
             return vehicle;
         }
 
+        public void Add(Vehicle vehicle, Employee employee)
+        {
+            using (DbContextTransaction transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    context.Employees.Add(employee);
+                    context.SaveChanges();
+
+                    context.Vehicles.Add(vehicle);
+                    context.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (Exception e)
+                {
+                    transaction.Rollback();
+                }
+            } //  -> wywoluje transaction.Dispose();
+
+
+
+
+
+        }
     }
 }

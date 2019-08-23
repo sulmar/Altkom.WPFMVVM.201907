@@ -17,6 +17,11 @@ namespace SWOP.Transport.FakeRepositories
         {
         }
 
+        public void Add(Vehicle vehicle, Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
         public ICollection<Vehicle> Get(VehicleSearchCriteria criteria)
         {
             IEnumerable<Vehicle> results = entities;
