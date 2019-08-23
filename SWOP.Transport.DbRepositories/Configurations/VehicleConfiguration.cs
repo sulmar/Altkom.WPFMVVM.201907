@@ -27,9 +27,14 @@ namespace SWOP.Transport.DbRepositories.Configurations
                 .HasMaxLength(8)
                 .IsRequired()
                 .IsUnicode(true);
+            // .IsConcurrencyToken();
 
             //Property(p => p.CreatedAt)
             //    .HasColumnType("datetime2");
+
+            Property(p => p.RowVersion)
+                .IsRowVersion()
+                .IsConcurrencyToken();
         }
     }
 }

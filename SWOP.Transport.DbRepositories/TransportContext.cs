@@ -4,6 +4,9 @@ using SWOP.Transport.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Metadata.Edm;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,10 +19,32 @@ namespace SWOP.Transport.DbRepositories
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Role> Roles { get; set; }
 
+        public ObjectContext ObjectContext => ((IObjectContextAdapter)this).ObjectContext;
+
         public TransportContext()
             : base("TransportConnection")
         {
             this.Database.Log = Console.WriteLine;
+
+            GetDocumentation();
+        }
+
+        private void GetDocumentation()
+        {
+            var workspace = ObjectContext.MetadataWorkspace;
+
+            var tables = workspace.GetItems<EntityType>(DataSpace.CSpace);
+
+            foreach (var table in tables)
+            {
+                Console.WriteLine(table.Name);
+
+                foreach (var property in table.Properties)
+                {
+                    Console.WriteLine($"{property.Name}");
+                }
+
+            }
         }
 
 

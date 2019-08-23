@@ -16,6 +16,8 @@ namespace SWOP.Transport.Models
 
         public ICollection<Deadline> Deadlines { get; set; }
 
+        public byte[] RowVersion { get; set; }
+
         // Lazy loading
         // public virtual Employee Owner { get; set; }
 

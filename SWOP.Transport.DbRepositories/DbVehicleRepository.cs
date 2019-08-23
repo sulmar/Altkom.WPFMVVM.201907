@@ -4,6 +4,7 @@ using SWOP.Transport.Models.SearchCriterias;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,13 +70,29 @@ namespace SWOP.Transport.DbRepositories
             
             context.Entry(entity).State = EntityState.Modified;
 
-            context.Entry(entity.Owner).State = EntityState.Unchanged;
+            if (entity.Owner!=null)
+                context.Entry(entity.Owner).State = EntityState.Unchanged;
 
             var entries = context.ChangeTracker.Entries();
 
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
 
-            Console.WriteLine(context.Entry(entity).State);
+                Console.WriteLine(context.Entry(entity).State);
+            }
+            catch(DbUpdateConcurrencyException e)
+            {
+                foreach (var entry  in e.Entries)
+                {
+                    // Pobranie aktualnego obiektu z bazy danych
+
+                    var values = entry.GetDatabaseValues();
+                    Vehicle vehicle = (Vehicle)values.ToObject();
+
+                    
+                }
+            }
 
 
             // base.Update(entity);
