@@ -945,7 +945,7 @@ private static void Save(Order oder)
         scope.Complete();
     }
 }
-
+~~~
 
 uwaga: w przypadku wykorzystania transakcji w metodzie asynchronicznej otrzymamy błąd. 
 Dlatego należy dodać parametr w konstruktorze:
@@ -953,8 +953,7 @@ Dlatego należy dodać parametr w konstruktorze:
 ~~~ csharp
 var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled)
 ~~~
-
-        
+     
 
 ## Współbieżność
 
